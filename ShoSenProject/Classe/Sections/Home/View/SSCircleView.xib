@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSCircleView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uCp-0p-aIw">
+                    <rect key="frame" x="45" y="211" width="285" height="245"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_circle_alert" translatesAutoresizingMaskIntoConstraints="NO" id="MGy-6c-icn">
+                            <rect key="frame" x="84.5" y="15" width="116" height="75"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="116" id="imt-Ek-eGV"/>
+                                <constraint firstAttribute="height" constant="75" id="pSe-gM-ymv"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜您获得 500贡献值" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxH-GB-A3H">
+                            <rect key="frame" x="40" y="100" width="205" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="R4F-hB-dGI"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JyN-me-9dw">
+                            <rect key="frame" x="70" y="165" width="145" height="35"/>
+                            <color key="backgroundColor" red="0.83921568629999999" green="0.70196078429999997" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="QAc-0t-a8B"/>
+                                <constraint firstAttribute="width" constant="145" id="hTO-i2-ztq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="JyN-me-9dw" firstAttribute="centerX" secondItem="uCp-0p-aIw" secondAttribute="centerX" id="7iE-Fu-lQQ"/>
+                        <constraint firstItem="wxH-GB-A3H" firstAttribute="top" secondItem="MGy-6c-icn" secondAttribute="bottom" constant="10" id="F0x-a0-NAc"/>
+                        <constraint firstItem="MGy-6c-icn" firstAttribute="centerX" secondItem="uCp-0p-aIw" secondAttribute="centerX" id="FR2-XN-Oin"/>
+                        <constraint firstItem="JyN-me-9dw" firstAttribute="top" secondItem="wxH-GB-A3H" secondAttribute="bottom" constant="25" id="N7x-sf-qP0"/>
+                        <constraint firstAttribute="height" constant="245" id="WdS-2Q-okY"/>
+                        <constraint firstItem="MGy-6c-icn" firstAttribute="top" secondItem="uCp-0p-aIw" secondAttribute="top" constant="15" id="gsz-7q-5LI"/>
+                        <constraint firstAttribute="width" constant="285" id="jeZ-Of-SUL"/>
+                        <constraint firstItem="wxH-GB-A3H" firstAttribute="leading" secondItem="uCp-0p-aIw" secondAttribute="leading" constant="40" id="uvy-eu-Bay"/>
+                        <constraint firstAttribute="trailing" secondItem="wxH-GB-A3H" secondAttribute="trailing" constant="40" id="zUn-4d-NBc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="uCp-0p-aIw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="erN-3M-7pE"/>
+                <constraint firstItem="uCp-0p-aIw" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fCb-Ip-VDd"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="bg_view" destination="uCp-0p-aIw" id="Edh-zk-GeS"/>
+                <outlet property="confirm_button" destination="JyN-me-9dw" id="RGI-jG-cgz"/>
+                <outlet property="content_label" destination="wxH-GB-A3H" id="yOc-Ot-f1w"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="home_circle_alert" width="78" height="50"/>
+    </resources>
+</document>

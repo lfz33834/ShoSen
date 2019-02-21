@@ -1,0 +1,195 @@
+//
+//  SSUserInfoVC.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/25.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSUserInfoVC.h"
+#import "SSUserInfoCell.h"
+#import "ChinaPlckerView.h"
+#import "SSUserInfoViewModel.h"
+#import "FZPickerTool.h"
+#import "SSFlagsModel.h"
+#import "SSSelectLocalPhoto.h"
+
+@interface SSUserInfoVC ()<UITableViewDelegate,UITableViewDataSource>
+
+
+
+@property (nonatomic, strong) UITableView *userInfoTable;
+@property (nonatomic, strong) NSMutableArray *flagsArray;
+@property (nonatomic, strong) NSMutableArray *statusArray;
+@property (nonatomic, strong) SSUserInfoViewModel *userInfoVM;
+@property (nonatomic, strong) SSUserInfoCell *tableCell;
+@property (nonatomic, strong) SSSelectLocalPhoto *selectPhoto;
+@property (nonatomic, copy)   NSString *imageFilePath;
+
+@property (nonatomic, copy) NSString *province;
+@property (nonatomic, copy) NSString *city;
+@property (nonatomic, copy) NSString *sex;
+@property (nonatomic, copy) NSString *status;
+
+@end
+
+@implementation SSUserInfoVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    WEAKSELF
+    self.userInfoVM = [[SSUserInfoViewModel alloc]init];
+    self.selectPhoto = [[SSSelectLocalPhoto alloc]init];
+    [self.view addSubview:self.userInfoTable];
+
+    self.selectPhoto.block = ^(NSString *filePath, UIImage *headImg) {
+        weakSelf.imageFilePath = filePath;
+        weakSelf.tableCell.header_imageview.image = headImg;
+    };
+    [self.userInfoVM feltFlags:^(NSMutableArray *data_arrray) {
+        weakSelf.flagsArray = data_arrray;
+        [weakSelf.userInfoTable reloadData];
+    }];
+    [self.userInfoVM feltStatus:^(NSMutableArray *data_arrray) {
+        weakSelf.statusArray = data_arrray;
+        [weakSelf.userInfoTable reloadData];
+    }];
+    [self setTitle:@"个人介绍"];
+    
+    SSAccount *account = [SSAccountTool share].account;
+    if (account) {
+        self.province = account.province;
+        self.city = account.city;
+        self.status = account.title;
+        self.sex = account.sex;
+        self.imageFilePath = account.headimg;
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+}
+
+#pragma --tableDataSource--
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SSUserInfoCell *cell = [SSUserInfoCell cellWithTableView:tableView];
+    WEAKSELF
+    cell.block = ^(UserInfoTapType type) {
+        if (type == UserInfoTapTypeLocation) {
+            [ChinaPlckerView customChinaPicker:weakSelf superView:self.view];
+        }else if(type == UserInfoTapTypeStatus)
+        {
+            [weakSelf selectStatus];
+        }else if (type == UserInfoTapTypeHeaderImage)
+        {
+            [weakSelf selectImage];
+        }else{
+            [weakSelf finishButtonTap];
+        }
+    };
+    cell.flagsArray = self.flagsArray;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.tableCell = cell;
+    return cell;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+#pragma --tableDelegate--
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 640;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [UIView new];
+}
+
+- (void)chinaPlckerViewDelegateChinaModel:(ChinaArea *)chinaModel{
+    NSString *locationStr = [NSString stringWithFormat:@"%@-%@",chinaModel.provinceModel.NAME,chinaModel.cityModel.NAME];
+    self.province = chinaModel.provinceModel.NAME;
+    self.city = chinaModel.cityModel.NAME;
+
+    [self.tableCell.location_button setTitle:locationStr forState:UIControlStateNormal];
+ }
+
+- (void)selectStatus
+{
+    [FZPickerTool show:@[self.statusArray] didSelectBlock:^(NSIndexPath *indexPath) {
+        NSLog(@"%@", indexPath);
+        SSFlagsModel *model = self.statusArray[indexPath.row];
+        self.tableCell.status_label.text = model.dicValue;
+        self.status = model.dicCode;
+    }];
+}
+
+- (void)selectImage
+{
+    [FZAlertTool showActionSheetWithCurrentController:self withTitle:@"选择照片" withMessage:@"" withUIAlertControllerStyle:UIAlertControllerStyleActionSheet withOtherBtnTitle:@[@"拍照",@"本地相册"] cancelHidden:YES result:^(NSString *paramNavWayStr) {
+        if ([paramNavWayStr isEqualToString:@"拍照"]) {
+            [self.selectPhoto selectLocalPhotoWithWay:paramNavWayStr targetVC:self];
+        }else if ([paramNavWayStr isEqualToString:@"本地相册"])
+        {
+            [self.selectPhoto selectLocalPhotoWithWay:paramNavWayStr targetVC:self];
+        }
+    }];
+}
+
+- (void)finishButtonTap
+{
+    if(self.imageFilePath.length < 1)
+    {
+        [ProgressHUD showSuccess:@"请选择头像"];
+        return;
+    }
+    NSString *sexString = [NSString stringWithFormat:@"%ld",(long)self.tableCell.selectSex];
+    [self.userInfoVM updateUserInfoHeaderImage:self.imageFilePath nickName:self.tableCell.nickname_textfield.text signature:self.tableCell.content_textfield.text sex:sexString status:self.status location:self.province city:self.city flags:self.tableCell.flagsArray callback:^(id object) {
+        [self.navigationController popViewControllerAnimated:YES];
+        self.block();
+        [ProgressHUD showSuccess:@"保存成功"];
+    }];
+}
+
+- (UITableView *)userInfoTable
+{
+    if (!_userInfoTable) {
+        _userInfoTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kwidth, kheight) style:UITableViewStylePlain];
+        _userInfoTable.delegate = self;
+        _userInfoTable.dataSource = self;
+        _userInfoTable.backgroundColor = kColor(@"ffffff");
+        _userInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _userInfoTable;
+}
+
+- (NSMutableArray *)flagsArray
+{
+    if (_flagsArray == nil) {
+        _flagsArray = [[NSMutableArray alloc]init];
+    }
+    return _flagsArray;
+}
+
+- (NSMutableArray *)statusArray
+{
+    if (_statusArray == nil) {
+        _statusArray = [[NSMutableArray alloc]init];
+    }
+    return _statusArray;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+@end

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="icc-ti-eD7" customClass="SSOrderListPayCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="308"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="icc-ti-eD7" id="KTn-Qw-fCh">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="307.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuN-Ur-ELd">
+                        <rect key="frame" x="15" y="45" width="345" height="252.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_orderlist_bg" translatesAutoresizingMaskIntoConstraints="NO" id="6i5-rC-i5c">
+                                <rect key="frame" x="0.0" y="0.0" width="345" height="160"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="mLB-e8-S4I"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETX-6t-r5I">
+                                <rect key="frame" x="0.0" y="160" width="345" height="53"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgu-7d-1pY">
+                                        <rect key="frame" x="180" y="16" width="150" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="EsC-mo-f81"/>
+                                            <constraint firstAttribute="width" constant="150" id="Tvn-rM-eaI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="bgu-7d-1pY" firstAttribute="centerY" secondItem="ETX-6t-r5I" secondAttribute="centerY" id="EIV-mE-89j"/>
+                                    <constraint firstAttribute="trailing" secondItem="bgu-7d-1pY" secondAttribute="trailing" constant="15" id="P6x-ou-uaV"/>
+                                    <constraint firstAttribute="height" constant="53" id="eGv-uy-4qp"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEg-IQ-EWt">
+                                <rect key="frame" x="0.0" y="213" width="345" height="39.5"/>
+                                <color key="backgroundColor" red="0.83921568627450982" green="0.70196078431372544" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="立即支付">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="payButtonTapAction:" destination="icc-ti-eD7" eventType="touchUpInside" id="Ke9-Hw-WsX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ZEg-IQ-EWt" secondAttribute="bottom" id="IAK-LO-U98"/>
+                            <constraint firstItem="6i5-rC-i5c" firstAttribute="leading" secondItem="BuN-Ur-ELd" secondAttribute="leading" id="Id6-3g-65O"/>
+                            <constraint firstAttribute="trailing" secondItem="ETX-6t-r5I" secondAttribute="trailing" id="Mys-h5-eyG"/>
+                            <constraint firstItem="ZEg-IQ-EWt" firstAttribute="top" secondItem="ETX-6t-r5I" secondAttribute="bottom" id="OGK-Ff-OQZ"/>
+                            <constraint firstAttribute="trailing" secondItem="ZEg-IQ-EWt" secondAttribute="trailing" id="RJq-ve-gf3"/>
+                            <constraint firstAttribute="trailing" secondItem="6i5-rC-i5c" secondAttribute="trailing" id="cOB-j3-KPw"/>
+                            <constraint firstItem="ETX-6t-r5I" firstAttribute="leading" secondItem="BuN-Ur-ELd" secondAttribute="leading" id="hPx-WC-7im"/>
+                            <constraint firstItem="6i5-rC-i5c" firstAttribute="top" secondItem="BuN-Ur-ELd" secondAttribute="top" id="j0K-5d-rbi"/>
+                            <constraint firstItem="ETX-6t-r5I" firstAttribute="top" secondItem="6i5-rC-i5c" secondAttribute="bottom" id="o2R-DY-HsN"/>
+                            <constraint firstItem="ZEg-IQ-EWt" firstAttribute="leading" secondItem="BuN-Ur-ELd" secondAttribute="leading" id="sq3-Dc-YTk"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已支付" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEB-B8-htp">
+                        <rect key="frame" x="15" y="15" width="200" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="aNj-j5-5jJ"/>
+                            <constraint firstAttribute="width" constant="200" id="euW-4R-haH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="BuN-Ur-ELd" firstAttribute="leading" secondItem="KTn-Qw-fCh" secondAttribute="leading" constant="15" id="7mE-BL-3BY"/>
+                    <constraint firstAttribute="trailing" secondItem="BuN-Ur-ELd" secondAttribute="trailing" constant="15" id="LNj-xT-WcR"/>
+                    <constraint firstItem="WEB-B8-htp" firstAttribute="leading" secondItem="KTn-Qw-fCh" secondAttribute="leading" constant="15" id="MO9-BY-yv8"/>
+                    <constraint firstItem="WEB-B8-htp" firstAttribute="top" secondItem="KTn-Qw-fCh" secondAttribute="top" constant="15" id="b6d-7x-7hc"/>
+                    <constraint firstAttribute="bottom" secondItem="BuN-Ur-ELd" secondAttribute="bottom" constant="10" id="pht-Tu-fEd"/>
+                    <constraint firstItem="BuN-Ur-ELd" firstAttribute="top" secondItem="KTn-Qw-fCh" secondAttribute="top" constant="45" id="yeW-4y-jtL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="header_imageview" destination="6i5-rC-i5c" id="n4h-Ea-2mH"/>
+                <outlet property="pay_button" destination="ZEg-IQ-EWt" id="Zb5-jk-rUC"/>
+                <outlet property="paycell_view" destination="BuN-Ur-ELd" id="QpZ-WS-rR6"/>
+                <outlet property="status_label" destination="WEB-B8-htp" id="zcT-XO-yhJ"/>
+                <outlet property="title_label" destination="bgu-7d-1pY" id="cYD-fb-uqY"/>
+            </connections>
+            <point key="canvasLocation" x="-125.5" y="138"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="mine_orderlist_bg" width="345" height="159"/>
+    </resources>
+</document>

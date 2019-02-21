@@ -1,0 +1,154 @@
+//
+//  NSString+Extension.h
+//  qingsongchou
+//
+//  Created by bluehedgehog on 16/5/23.
+//  Copyright © 2016年 Chai. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+
+
+@interface NSString (Extension)
+
+#pragma mark 验证相关
+
+//判断是否包含 Emoji 表情
++ (BOOL)isContainsEmoji:(NSString *)string;
+
+//身份证号码是否合法
+- (BOOL)validateIDCardNumber;
+
+//校验手机号
+- (BOOL)validatePhone;
+
+//邮箱是否合法
+- (BOOL)isValidateEmail;
+
+//隐藏电话号码
++ (NSString *)HideNumberWithPhone:(NSString *)phoneNum;
+
+//银行卡
++ (BOOL) validateBankCardNumber: (NSString *)bankCardNumber;
+
+//控制最多输入两位小数
++ (BOOL) matchNumbersInTextfield:(NSString*)text;
+
+//校验只能输数字
++ (BOOL) validateOnlyNumber: (NSString *)text;
+
+- (BOOL)isUsername; //5-20
+
+- (BOOL)isPassword; // 8-20
+
+- (BOOL)isValidOnlyLettersAndNumbers; // 只有字母、数字
+
+- (BOOL)isPureInts;        //判断是否为整形
+
+- (BOOL)isPureFloat;      //判断是否为浮点形
+
+
+
+
+#pragma mark  解析相关
+
+// json解析
+-(id)JSONValue;
+
+- (NSString *)URLEncodedString;
+
+- (NSString *)URLDecodedString;
+
+- (NSDate *)dateFromDateStringTimezone:(NSString *)timezone;
+
+// 时间戳对应的NSDate
+@property (nonatomic,strong,readonly) NSDate *date;
+
+// 根据身份证获取年龄
+- (NSInteger)getAgeWithCardNum:(NSString *)idCardNum;
+
+- (int)getBirthDataNum:(NSString *)idCardNum;
+
+// 根据身份证来获取年龄
+- (NSTimeInterval)ageForUserCardNum:(NSString *)idCardNum;
+
+// 获取字符串长度（中英文）
+-  (int)stringConvertToInt:(NSString*)strtemp;
+
+// 获取字符串MD5
++ (NSString *)md5HexDigest:(NSString*)input;
+
+//  32位MD5加密
+@property (nonatomic,copy,readonly) NSString *md5;
+
+//SHA1加密
+@property (nonatomic,copy,readonly) NSString *sha1;
+
+
+
+
+#pragma mark 属性
+
+@property(nonatomic,strong)UIColor* tintColor;
+
+#pragma mark - 修剪
+
+//文件名 拼接方法
+- (NSString *)filenameAppend:(NSString *)append;
+
+// 去除 空格
+- (NSString *)stringByTrimmingWhitespace;
+
+- (NSString *)stringByTrimmingLeadingWhitespace;
+
+- (NSString *)stringByTrimmingLeadingAndTrailingWhitespace;
+
+// 去除/r /n 空格
+- (NSString *)stringByTrimmingWhitespaceAndNewline;
+
+- (NSString *)stringByTrimmingLeadingAndTrailingWhitespaceAndNewline;
+
+// html
+- (NSString *)stringByTrimmingHTMLTags;
+
+// 去除/r /n
+- (NSString *)trimmingBackslashNR;
+
+- (BOOL)cp_containsString:(NSString *)aString;
+
+- (NSMutableAttributedString*)stringToAtrribute;
+
+- (int )blankToString;
+
+- (CGFloat)calculateHeightWithWidth:(CGFloat)width Font:(CGFloat)font;
+
+#pragma mark size
+
+// 计算文字size
++(CGSize)sizeForNoticeTitle:(NSString*)text font:(UIFont*)font  maxSize:(CGSize)maxSize;
+
+// 带间隙 (line)
++(CGSize)sizeForNoticeTitle:(NSString*)text font:(UIFont*)font  maxSize:(CGSize)maxSize spacing:(CGFloat)spacing;
+
+// 增加字体的行间距 8  font 12
+- (NSMutableAttributedString*)stringToAttribute;
+
++ (NSString *)getCurentTimeDate;
+
+// 数字，分割
++(NSString *)ChangeNumberFormat:(NSString *)num;
+//时间戳转化
+- (NSString *)timeStampTransform;
++(NSString *)timestampSwitchTime:(NSString*)timestamp andFormatter:(NSString *)format;
+- (NSString *)timestampSwitchTime:(NSInteger)timestamp andFormatter:(NSString *)format;
+
+
+//字典转化成json字符串
++ (NSString*)dictionaryToJson:(NSDictionary *)dic;
++ (NSDictionary *)parseJSONStringToNSDictionary:(NSString *)JSONString;
+
++(NSString *)replaceUnicode:(NSString*)unicodeStr;
+@end
+

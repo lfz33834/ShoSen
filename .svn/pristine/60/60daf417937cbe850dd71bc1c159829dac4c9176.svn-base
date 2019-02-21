@@ -1,0 +1,44 @@
+//
+//  FZHttpTool.h
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/4.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
+typedef void (^FZSuccess)(id _Nullable json);
+typedef void (^FZFailure)(NSError * _Nullable error);
+typedef void (^ImageHttpSuccessBlock)(id _Nullable JSON);
+typedef void (^ImageHttpFailureBlock)(NSError * _Nullable error);
+
+@interface FZHttpTool : NSObject
+
+
+//单例
++(FZHttpTool *_Nullable)share;
+
++ (void)get:(NSString *)url parameters:(NSDictionary *)parameters httpToolSuccess:(FZSuccess _Nullable )httpToolSuccess failure:(FZFailure)failure;
++ (void)get:(NSString *)url parameters:(NSDictionary *)parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure;
+
++ (void)post:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure;
++ (void)post:(NSString *)url parameters:(id )parameters httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure;
+
++ (void)postUserInfo:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure;
+
++ (void)deleted:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure;
+
++ (void)put:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure;
+
++ (void)patch:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure;
+
++ (RACSignal *)getWithURL:(NSString *)uslString
+            withParamater:(NSDictionary *)paramter ;
+
++ (RACSignal *)postWithURL:(NSString *)urlString
+             withParamater:(NSDictionary *)parameter;
+
+- (void)checkNetworkStatus:(void (^)(BOOL))block;
+@end

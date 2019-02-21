@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSCircleShareBlackListView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZH-Zs-5NL">
+                    <rect key="frame" x="0.0" y="552" width="375" height="115"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBF-9f-FWl">
+                            <rect key="frame" x="100" y="25" width="60" height="65"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="jC1-mc-c4g"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-45"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="-25" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="微信" image="circle_wechat">
+                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="oneButtonTapAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="6Vd-Ii-NE4"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfK-YU-2GU">
+                            <rect key="frame" x="215" y="25" width="60" height="65"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="JhC-Dw-bUe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-45"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="-25" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="朋友圈" image="circle_pengyouwechat">
+                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="twoButtonTapAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="9SH-Fe-p5H"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="aBF-9f-FWl" firstAttribute="top" secondItem="IZH-Zs-5NL" secondAttribute="top" constant="25" id="Amc-uE-5pV"/>
+                        <constraint firstAttribute="bottom" secondItem="aBF-9f-FWl" secondAttribute="bottom" constant="25" id="Edu-H5-zbB"/>
+                        <constraint firstAttribute="bottom" secondItem="bfK-YU-2GU" secondAttribute="bottom" constant="25" id="Gve-9l-rId"/>
+                        <constraint firstItem="bfK-YU-2GU" firstAttribute="top" secondItem="IZH-Zs-5NL" secondAttribute="top" constant="25" id="S8g-XH-LDD"/>
+                        <constraint firstAttribute="trailing" secondItem="bfK-YU-2GU" secondAttribute="trailing" constant="100" id="Tjy-WG-Hnf"/>
+                        <constraint firstItem="aBF-9f-FWl" firstAttribute="leading" secondItem="IZH-Zs-5NL" secondAttribute="leading" constant="100" id="WNb-Sh-8IJ"/>
+                        <constraint firstAttribute="height" constant="115" id="ihc-n6-hDp"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.5" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="IZH-Zs-5NL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="IO6-er-xGQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="IZH-Zs-5NL" secondAttribute="trailing" id="Vi8-Ap-Ts1"/>
+                <constraint firstAttribute="bottom" secondItem="IZH-Zs-5NL" secondAttribute="bottom" id="kRN-Yg-qzX"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="one_button" destination="aBF-9f-FWl" id="fic-fg-gVd"/>
+                <outlet property="two_button" destination="bfK-YU-2GU" id="dn9-1P-qUT"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="circle_pengyouwechat" width="30" height="30"/>
+        <image name="circle_wechat" width="30" height="30"/>
+    </resources>
+</document>

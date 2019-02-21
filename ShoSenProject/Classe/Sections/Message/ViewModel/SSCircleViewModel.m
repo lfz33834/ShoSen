@@ -1,0 +1,306 @@
+//
+//  SSCircleViewModel.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/10/30.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSCircleViewModel.h"
+
+@implementation SSCircleViewModel
+
++(SSCircleViewModel *)share{
+    static SSCircleViewModel *shareInstace = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shareInstace=[[SSCircleViewModel alloc] init];
+    });
+    return shareInstace;
+}
+
+//content 内容 location 位置   picture   图片  userId 用户id
+//发送朋友圈
+- (void)addMessageWithContent:(NSString *)content location:(NSString *)location picture:(NSString *)picture   callBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    //编码
+    NSString *contentStr = [content URLEncodedString] ?[content URLEncodedString]:@"";
+    NSDictionary *params = @{@"content":contentStr,@"location":location?location:@"",@"picture":picture?picture:@"",@"userId":account.uid};
+    [FZHttpTool post:UserCircleAddMess parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//删除朋友圈
+- (void)delMessageWithMessageID:(NSString *)messageId callBack:(SSCircleViewModelBlock)block
+{
+    NSDictionary *params = @{@"messId":messageId};
+    [FZHttpTool post:UserCircleDelMess parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+     } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+
+//取消关注
+- (void)delFollowWithUserID:(NSString *)userId follower:(NSString *)follower callBack:(SSCircleViewModelBlock)block
+{
+    NSDictionary *params = @{@"userId":userId,@"follower":follower};
+    [FZHttpTool post:UserCircleDelFollow parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//关注
+- (void)addFollowWithUserID:(NSString *)userId follower:(NSString *)follower callBack:(SSCircleViewModelBlock)block
+{
+    NSDictionary *params = @{@"userId":userId,@"follower":follower};
+    [FZHttpTool post:UserCircleAddFollow parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//关注列表
+- (void)followListWithUserID:(NSString *)userId callBack:(SSCircleViewModelBlock)block
+{
+    NSDictionary *params = @{@"userId":userId};
+    [FZHttpTool post:UserCircleFollowList parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//添加  "content": "string",//内容
+//"messId":1,//朋友圈id
+//"parentId": 0,//回复的评论ID 没有默认0
+//"userId": 19//评论用户ID
+- (void)addCommentWithMessageID:(NSString *)messId content:(NSString *)content parentId:(NSString *)parentId callBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSString *uid = [NSString stringWithFormat:@"%@",account.uid];
+    NSString *parenIDString;
+    if (parentId && parentId.length > 0) {
+        parenIDString = parentId;
+    }else{
+        parenIDString = @"0";
+    }
+    NSDictionary *params = @{@"messId":messId,@"content":content,@"parentId":parenIDString,@"userId":uid};
+    [FZHttpTool post:UserCircleAddComment parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//删除评论
+- (void)delCommentWithCommentID:(NSString *)Id callBack:(SSCircleViewModelBlock)block
+{
+    NSDictionary *params = @{@"id":Id};
+    [FZHttpTool post:UserCircleDelComment parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//获取圈子的数据
+- (void)userCircleInfoCallBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":account.uid};
+    [FZHttpTool post:UserCircleGetCountByUserId parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+
+//好友推荐
+- (void)userCircleFriendInvitationWithPageNum:(NSString *)pageNum CallBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":account.uid,@"pageNum":pageNum};
+    [FZHttpTool post:UserCircleFriendInvitation parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//个人关注列表
+- (void)userCircleSelfFollowWithUserId:(NSString *)userid PageNum:(NSString *)pageNum CallBack:(SSCircleViewModelBlock)block
+{
+//        SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":userid,@"pageNum":pageNum};
+    [FZHttpTool post:UserCircleSlefFollow parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//个人消息列表
+- (void)userCircleSelfMessageWithUserId:(NSString *)userid content:(NSString*)content PageNum:(NSString *)pageNum CallBack:(SSCircleViewModelBlock)block
+{
+//    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":userid,@"pageNum":pageNum,@"content":content?content:@""};
+    [FZHttpTool post:UserCircleSlefMessage parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+
+//热门话题
+- (void)userCircleHotTopWithPageNum:(NSString *)pageNum CallBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":account.uid,@"pageNum":pageNum};
+    [FZHttpTool post:UserCircleHotTop parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//获取轮播图列表
+- (void)userBannerListBannerListWithType:(NSString *)type  CallBack:(SSCircleViewModelBlock)block
+{
+    NSDictionary *params = @{@"type":type};
+    [FZHttpTool get:UserCircleBannerList parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//评论点赞
+- (void)circleUpdateCommentMarkWithCommentId:(NSString *)commentId markStatus:(NSString *)markStatus allBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"commentId":commentId,@"markStatus":markStatus,@"userId":account.uid};
+    [FZHttpTool post:UserCircleUpdateCommentMark parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//朋友圈点赞
+- (void)circleUpdateMessMarkWithMessId:(NSString *)messId markStatus:(NSString *)markStatus allBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"messId":messId,@"markStatus":markStatus,@"userId":account.uid};
+    [FZHttpTool post:UserCircleUpdateMessMark parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//图片浏览器
+- (void)showBrowserForSimpleCaseWithIndex:(NSInteger)index dataArray:(NSMutableArray *)imageArray {
+    
+    NSMutableArray *browserDataArr = [NSMutableArray array];
+    [imageArray enumerateObjectsUsingBlock:^(NSString *_Nonnull urlStr, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        YBImageBrowseCellData *data = [YBImageBrowseCellData new];
+        data.url = [NSURL URLWithString:urlStr];
+        //        data.sourceObject = [self sourceObjAtIdx:idx];
+        [browserDataArr addObject:data];
+    }];
+    YBImageBrowser *browser = [YBImageBrowser new];
+    browser.dataSourceArray = browserDataArr;
+    browser.currentIndex = index;
+    [browser show];
+}
+
+//我的消息列表
+- (void)circleMyReMesssageWithPageNum:(NSString *)pageNum allBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":account.uid,@"pageNum":pageNum};
+    [FZHttpTool post:UserCircleMyReMesss parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//我的通知消息
+- (void)circleNoticeMessCallBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":account.uid};
+    [FZHttpTool post:UserCircleNoticeMess parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+//更多关注
+- (void)circleMoreFollowUserId:(NSString *)userId  allBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":account.uid,@"pageNum":@"1",@"bUserId":@"2"};
+    [FZHttpTool post:UserCircleMoreFollow parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//参数： userId 用户ID
+//targetId 目标用户ID
+//type 0拉黑 1举报
+//reason  举报原因，拉黑不填
+//举报拉黑
+- (void)circleUserCircleReportAndBlacklistWithUserId:(NSString *)userId targetId:(NSString *)targeId type:(NSString*)type reason:(NSString *)reason allBack:(SSCircleViewModelBlock)block
+{
+    NSDictionary *params = @{@"userId":userId,@"targetId":targeId,@"type":type,@"reason":reason};
+    [FZHttpTool post:UserCircleReportAndBlacklist parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//参数 userId
+//targetId
+//取消拉黑
+- (void)circleUserCircleCancelBlacklistWithUserId:(NSString *)userId targetId:(NSString *)targetId allBack:(SSCircleViewModelBlock)block
+{
+    NSDictionary *params = @{@"userId":userId,@"targetId":targetId};
+    [FZHttpTool post:UserCircleCancelBlacklist parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+//我的粉丝
+- (void)circleUserCircleSelectFansWithPageNum:(NSString *)PageNum allBack:(SSCircleViewModelBlock)block
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSDictionary *params = @{@"userId":account.uid,@"pageNum":PageNum};
+    [FZHttpTool post:UserCircleSelectFans parameters:params isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+        block(json);
+    } failure:^(NSError * _Nullable error) {
+        
+    }];
+}
+
+
+
+@end

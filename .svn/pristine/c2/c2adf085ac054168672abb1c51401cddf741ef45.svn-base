@@ -1,0 +1,106 @@
+//
+//  SSCirclePublishVC.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/10/24.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSCirclePublishVC.h"
+#import "HXPhotoViewController.h"
+#import "HXPhotoView.h"
+#import "SSCircleViewModel.h"
+
+@interface SSCirclePublishVC ()<HXPhotoViewDelegate>
+@property (strong, nonatomic) HXPhotoManager *manager;
+@property (nonatomic,strong) SSCircleViewModel *viewModel;
+@property (nonatomic, strong) HXPhotoView *photoView;
+@property (nonatomic, strong) NSMutableArray *photoArray;
+@property (nonatomic, copy) NSString *photoArrayString;
+@property (nonatomic, copy) NSString *locationString;
+
+@end
+
+@implementation SSCirclePublishVC
+-  (SSCircleViewModel *)viewModel
+{
+    if (_viewModel == nil) {
+        _viewModel = [[SSCircleViewModel alloc]init];
+    }
+    return _viewModel;
+}
+
+- (HXPhotoManager *)manager
+{
+    if (!_manager) {
+        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhoto];
+    }
+    return _manager;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setTitle:@"动态"];
+    
+    UIButton * rightBtn = [UIButton itemWithFream:CGRectMake(0.0, 0.0, 30.0f, 30.0f) withbackGroundColor:[UIColor clearColor] withTitle:@"发布" withTitleColor:kColor(@"999999") withTitleSize:15 withIsBold:NO];
+    [rightBtn addTarget:self action:@selector(rightBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.automaticallyAdjustsScrollViewInsets = YES;
+    CGFloat width = self.view.frame.size.width;
+    HXPhotoView *photoView = [[HXPhotoView alloc] initWithFrame:CGRectMake(15, 0, width - 30, kheight) WithManager:self.manager];
+    photoView.delegate = self;
+    photoView.block = ^(NSString *location) {
+        self.locationString = location;
+    };
+    photoView.backgroundColor = [UIColor whiteColor];
+    self.photoView = photoView;
+    [self.view addSubview:photoView];
+}
+
+- (void)rightBtnAction
+{
+    WEAKSELF
+    [self.viewModel addMessageWithContent:self.photoView.headerview.content_textview.text location:self.locationString picture:self.photoArrayString callBack:^(id obj) {
+        NSLog(@"%@",obj);
+        [ProgressHUD showSuccess:@"发布成功"];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"REFRESHCIRCLE" object:nil];
+    }];
+}
+
+- (void)photoViewChangeComplete:(NSArray *)allList Photos:(NSArray *)photos Videos:(NSArray *)videos Original:(BOOL)isOriginal
+{
+    [FZUploadImageTool uploadImageWithPath:UserCircleUploadImageViewArray photos:photos params:nil success:^(id Json) {
+        self.photoArrayString = Json[@"data"][@"url"];
+        [ProgressHUD showSuccess:@"上传成功"];
+    } failure:^{
+        
+    }];
+//    for (int i = 0; i < photos.count; i ++) {
+//        HXPhotoModel *model = photos[i];
+//        [FZUploadImageTool uploadImageWithPath:UserCircleUploadImageView image:model.thumbPhoto params:nil success:^(id Json) {
+//            [self.photoArray addObject:Json[@"data"][@"url"]];
+//        } failure:^{
+//
+//        }];
+//    }
+}
+
+- (void)photoViewUpdateFrame:(CGRect)frame WithView:(UIView *)view
+{
+    NSLog(@"%@",NSStringFromCGRect(frame));
+}
+
+- (NSMutableArray *)photoArray
+{
+    if (_photoArray == nil) {
+        _photoArray = [[NSMutableArray alloc]init];
+    }
+    return _photoArray;
+}
+
+@end

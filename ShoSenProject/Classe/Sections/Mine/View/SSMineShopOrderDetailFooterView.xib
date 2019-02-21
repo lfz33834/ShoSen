@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSMineShopOrderDetailFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEh-12-Llm">
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="Kol-UQ-qCW"/>
+                    </constraints>
+                    <state key="normal" title="取消订单">
+                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="twoButtonTapAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="aUk-5W-EvP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TuZ-A5-j3x">
+                    <rect key="frame" x="160" y="0.0" width="215" height="55"/>
+                    <state key="normal" title="继续支付" backgroundImage="shop_bottom_button"/>
+                    <connections>
+                        <action selector="oneButtonTapAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="v2D-3w-ydH"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="TuZ-A5-j3x" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="NAt-54-Yaf"/>
+                <constraint firstAttribute="trailing" secondItem="TuZ-A5-j3x" secondAttribute="trailing" id="RlX-vZ-lKU"/>
+                <constraint firstItem="iEh-12-Llm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SZa-41-pBL"/>
+                <constraint firstItem="TuZ-A5-j3x" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ez2-1f-2Nh"/>
+                <constraint firstAttribute="bottom" secondItem="iEh-12-Llm" secondAttribute="bottom" id="gaP-PB-K94"/>
+                <constraint firstItem="iEh-12-Llm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gkk-An-17S"/>
+                <constraint firstItem="TuZ-A5-j3x" firstAttribute="leading" secondItem="iEh-12-Llm" secondAttribute="trailing" id="mI0-tT-4hL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cancel_button" destination="iEh-12-Llm" id="ln7-aK-qOP"/>
+                <outlet property="confirm_butotn" destination="TuZ-A5-j3x" id="u4Q-Ar-pob"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="shop_bottom_button" width="135" height="55"/>
+    </resources>
+</document>

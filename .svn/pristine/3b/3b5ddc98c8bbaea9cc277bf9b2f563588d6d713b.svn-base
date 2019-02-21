@@ -1,0 +1,51 @@
+//
+//  SSHomeViewModel.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/14.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSHomeViewModel.h"
+
+@implementation SSHomeViewModel
+
+- (NSMutableArray *)dataArray
+{
+    if (_dataArray == nil) {
+        _dataArray = [[NSMutableArray alloc]init];
+        SSHomeModel *model1 = [[SSHomeModel alloc]init];
+        model1.titleStr = @"违章查询";
+        model1.imageName = @"home_cell_car";
+        model1.className = @"";
+        [_dataArray addObject:model1];
+        SSHomeModel *model2 = [[SSHomeModel alloc]init];
+        model2.titleStr = @"道路救援";
+        model2.imageName = @"home_cell_save";
+        model2.className = @"";
+        [_dataArray addObject:model2];
+        SSHomeModel *model3 = [[SSHomeModel alloc]init];
+        model3.titleStr = @"保险服务";
+        model3.imageName = @"home_cell_service";
+        model3.className = @"";
+        [_dataArray addObject:model3];
+        SSHomeModel *model4 = [[SSHomeModel alloc]init];
+        model4.titleStr = @"代驾";
+        model4.imageName = @"home_cell_drive";
+        model4.className = @"";
+        [_dataArray addObject:model4];
+        SSHomeModel *model5 = [[SSHomeModel alloc]init];
+        model5.titleStr = @"洗车";
+        model5.imageName = @"home_cell_carwash";
+        model5.className = @"";
+        [_dataArray addObject:model5];
+        SSHomeModel *model6 = [[SSHomeModel alloc]init];
+        model6.titleStr = @"充电桩";
+        model6.imageName = @"home_cell_charge";
+        model6.className = @"";
+        [_dataArray addObject:model1];
+    }
+    return _dataArray;
+}
+
+@end

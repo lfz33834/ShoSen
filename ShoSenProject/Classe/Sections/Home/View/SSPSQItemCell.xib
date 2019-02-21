@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hNe-y4-M3o" customClass="SSPSQItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_lookin_one_normal" translatesAutoresizingMaskIntoConstraints="NO" id="OOG-qR-MKj">
+                        <rect key="frame" x="0.0" y="17.5" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="1tW-ja-sBl"/>
+                            <constraint firstAttribute="width" constant="15" id="2nJ-wF-MPB"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sfsdfsfsfas" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSa-oo-DcY">
+                        <rect key="frame" x="20" y="14.5" width="175" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="tcz-Oc-vPv"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="FSa-oo-DcY" secondAttribute="trailing" constant="5" id="CkW-1E-WU3"/>
+                <constraint firstItem="OOG-qR-MKj" firstAttribute="leading" secondItem="hNe-y4-M3o" secondAttribute="leading" id="HVZ-H0-eJa"/>
+                <constraint firstItem="FSa-oo-DcY" firstAttribute="leading" secondItem="OOG-qR-MKj" secondAttribute="trailing" constant="5" id="URM-2r-PP0"/>
+                <constraint firstItem="OOG-qR-MKj" firstAttribute="centerY" secondItem="hNe-y4-M3o" secondAttribute="centerY" id="Yqj-Vw-R1c"/>
+                <constraint firstItem="FSa-oo-DcY" firstAttribute="centerY" secondItem="hNe-y4-M3o" secondAttribute="centerY" id="qqo-2E-IbU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fEZ-xE-JpY"/>
+            <connections>
+                <outlet property="item_label" destination="FSa-oo-DcY" id="8H9-Cm-9d2"/>
+                <outlet property="left_imageview" destination="OOG-qR-MKj" id="aRL-6M-oCT"/>
+            </connections>
+            <point key="canvasLocation" x="148" y="60"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="home_lookin_one_normal" width="15" height="15"/>
+    </resources>
+</document>

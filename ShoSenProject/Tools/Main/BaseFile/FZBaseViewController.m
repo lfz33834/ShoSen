@@ -1,0 +1,309 @@
+//
+//  FZBaseViewController.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/4.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "FZBaseViewController.h"
+
+@interface FZBaseViewController ()
+
+@end
+
+@implementation FZBaseViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+//    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]){
+//
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
+//
+//    }
+//    self.navigationController.navigationBar.translucent = NO;
+
+     self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self setNavBlack];
+    self.navigationController.fd_fullscreenPopGestureRecognizer.enabled = YES;
+
+    // 一行代码搞定导航栏底部分割线是否隐藏
+    [self wr_setNavBarShadowImageHidden:YES];
+    self.view.backgroundColor = kColor(@"f8f8f8");
+}
+
+- (void)setNavWhite
+{
+    [self wr_setNavBarTintColor:kColor(@"ffffff")];
+    [self wr_setNavBarBarTintColor:kColor(@"ffffff")];
+    [self wr_setNavBarTitleColor:kColor(@"333333")];
+    [self wr_setNavBarBackgroundAlpha:1.0];
+    [self wr_setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)setBlackMode
+{
+    [self setNavBlack];
+    [self setNavBlackBack];
+}
+
+- (void)setNavBlack
+{
+    [self wr_setNavBarTintColor:kColor(@"111113")];
+    [self wr_setNavBarBarTintColor:kColor(@"111113")];
+    [self wr_setNavBarTitleColor:kColor(@"ffffff")];
+    [self wr_setNavBarBackgroundAlpha:1.0];
+    [self wr_setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+}
+
+- (void)setNavBlackBack
+{
+    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftBtn.frame = CGRectMake(0,0, 23,38);
+    [leftBtn setImage:[[UIImage imageNamed:@"home_left_arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]  forState:UIControlStateNormal];
+    [leftBtn addTarget:self action:@selector(blackBack)forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    self.navigationItem.leftBarButtonItems =@[leftItem];
+}
+
+- (void)blackBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)setback{
+    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftBtn.frame = CGRectMake(0,0, 23,38);
+//    leftBtn.contentEdgeInsets =UIEdgeInsetsMake(0, -20,0, 0);
+//    leftBtn.imageEdgeInsets =UIEdgeInsetsMake(0, -15-44,0, 0);
+    [leftBtn setImage:[[UIImage imageNamed:@"home_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]  forState:UIControlStateNormal];
+    [leftBtn addTarget:self action:@selector(backs)forControlEvents:UIControlEventTouchUpInside];
+//    [leftBtn setEnlargeEdgeWithTop:20 right:30 bottom:10 left:20];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    self.navigationItem.leftBarButtonItems =@[leftItem];
+}
+
+- (void)setLeftItemNull;{
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[UIView new]];
+}
+
+- (void)backs {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)setLeftBar:(NSString *)leftStr rightBar:(NSString *)rightStr block:(pushVCBlock)block
+{
+    self.navBlock = [block copy];
+    if (leftStr) {
+        UIButton * leftBtn = [UIButton itemWithFream:CGRectMake(0.0, 0.0, 50.0f, 40.0f) withbackGroundColor:[UIColor clearColor] withTitle:leftStr withTitleColor:[UIColor whiteColor] withTitleSize:16 withIsBold:NO];
+        [leftBtn addTarget:self action:@selector(leftBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem * leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftBtn];
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+    }
+    if (rightStr) {
+        UIButton * rightBtn = [UIButton itemWithFream:CGRectMake(0.0, 0.0, 50.0f, 40.0f) withbackGroundColor:[UIColor clearColor] withTitle:rightStr withTitleColor:[UIColor whiteColor] withTitleSize:16 withIsBold:NO];
+        [rightBtn addTarget:self action:@selector(rightBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem * rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+    }
+}
+
+- (void)leftBtnAction
+{
+    if (self.navBlock) {
+        self.navBlock(0);
+    }
+}
+- (void)rightBtnAction
+{
+    if (self.navBlock) {
+        self.navBlock(1);
+    }
+}
+
+- (void)IQKeyboardManagerSetting
+{
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    [IQKeyboardManager sharedManager].shouldShowToolbarPlaceholder=YES;
+    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemText = @"完成";
+    // 修改字体颜色
+    [IQKeyboardManager sharedManager].shouldToolbarUsesTextFieldTintColor = NO;
+    [IQKeyboardManager sharedManager].toolbarTintColor = [UIColor blackColor];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self IQKeyboardManagerSetting];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
+- (void)setTitleViewText:(NSString *)text {
+    
+    NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:17],NSFontAttributeName, nil];
+    
+    self.navigationController.navigationBar.titleTextAttributes = attributes;
+    self.title = text;
+}
+
+-(UIImageView *)emptyTipImg
+{
+    if (_emptyTipImg == nil) {
+        _emptyTipImg = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 102, 109)];
+        _emptyTipImg.center = CGPointMake(self.view.center.x, self.view.center.y - 109/2);
+    }
+    return _emptyTipImg;
+}
+-(UILabel *)emptyTipLab
+{
+    if (_emptyTipLab == nil) {
+        _emptyTipLab = [[UILabel alloc]labelWithFream:CGRectMake(0.0f, self.view.center.y + 20.0f, self.view.width, 20.0f) withTextString:@"" withTextColor:kColor(@"B1B1B1") withFontSize:16 withBold:NO withTextAlignment:NSTextAlignmentCenter];
+    }
+    return _emptyTipLab;
+}
+-(UIButton *)emptyRefresBtn
+{
+    if (_emptyRefresBtn == nil) {
+        _emptyRefresBtn = [UIButton itemWithFream:CGRectMake(0.0f, 0.0f, 113.0f, 68.0f) withNormarlImg:nil withHighImg:nil withSelectImg:nil];
+        [_emptyRefresBtn addTarget:self action:@selector(emptyRefreshBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _emptyRefresBtn;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+@end
+
+
+
+
+
+
+@implementation FZBaseViewController (emptyPage)
+
+-(void)emptyPage
+{
+    self.emptyTipImg.hidden = NO;
+    self.emptyTipLab.hidden = NO;
+    [self.view addSubview:self.emptyTipImg];
+    [self.view addSubview:self.emptyTipLab];
+}
+-(void)emptyLostNetWork
+{
+    self.emptyTipImg.hidden = NO;
+    self.emptyTipLab.hidden = NO;
+    self.emptyRefresBtn.hidden = NO;
+    [self.view addSubview:self.emptyTipImg];
+    [self.view addSubview:self.emptyTipLab];
+    [self.view addSubview:self.emptyRefresBtn];
+}
+- (void)emptyRefreshBtnAction
+{
+    self.emptyTipImg.hidden = YES;
+    self.emptyTipLab.hidden = YES;
+    self.emptyRefresBtn.hidden = YES;
+    if (self.neteorkBlock){
+        self.neteorkBlock();
+    }
+}
+
+@end
+
+
+
+
+
+@interface FZTableViewController ()
+
+@end
+
+@implementation FZTableViewController
+
+- (void)viewDidLoad
+{
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self IQKeyboardManagerSetting];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
+- (void)setTitleViewText:(NSString *)text {
+    
+    NSDictionary *attributes=[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,[UIFont systemFontOfSize:17],NSFontAttributeName, nil];
+    
+    self.navigationController.navigationBar.titleTextAttributes = attributes;
+    self.title = text;
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+  }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+ }
+
+- (void)IQKeyboardManagerSetting
+{
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    [IQKeyboardManager sharedManager].shouldShowToolbarPlaceholder=YES;
+    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemText = @"完成";
+    // 修改字体颜色
+    [IQKeyboardManager sharedManager].shouldToolbarUsesTextFieldTintColor = NO;
+    [IQKeyboardManager sharedManager].toolbarTintColor = [UIColor blackColor];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+//+ (instancetype)viewController:(QSCSBName)sbName {
+//    switch (sbName) {
+//
+//        case QSCSBNameME:
+//        {
+//            static UIStoryboard * s_storyboardME = nil;
+//
+//            if ( !s_storyboardME ){
+//                s_storyboardME = [UIStoryboard storyboardWithName:@"ME" bundle:nil];
+//            }
+//            NSString * identifier = NSStringFromClass([self class]);
+//            return [s_storyboardME instantiateViewControllerWithIdentifier:identifier];
+//            break;
+//        }
+//    }
+//}
+
+@end

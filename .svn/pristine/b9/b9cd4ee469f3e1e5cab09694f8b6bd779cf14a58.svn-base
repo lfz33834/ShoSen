@@ -1,0 +1,93 @@
+//
+//  SSLoveVC.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/13.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSLoveVC.h"
+
+@interface SSLoveVC ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *loveTable;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+
+@end
+
+@implementation SSLoveVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+ }
+
+#pragma --tableDataSource--
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+#pragma --tableDelegate--
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 147;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 412;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    
+    return [UIView new];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 55;
+}
+
+- (UITableView *)loveTable
+{
+    if (!_loveTable) {
+        _loveTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kwidth, kheight - TABBAR_HEIGHT) style:UITableViewStyleGrouped];
+        _loveTable.delegate = self;
+        _loveTable.dataSource = self;
+        _loveTable.backgroundColor = kColor(@"F7F7F7");
+        _loveTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _loveTable;
+}
+
+- (NSMutableArray *)dataArray
+{
+    if (_dataArray == nil) {
+        _dataArray = [[NSMutableArray alloc]init];
+    }
+    return _dataArray;
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+@end

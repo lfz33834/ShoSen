@@ -1,0 +1,22 @@
+//
+//  SSSettingVC.h
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/26.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "FZBaseViewController.h"
+
+typedef void(^SSSettingVCBlock)(void);
+
+@interface SSSettingVC : FZBaseViewController
+@property (weak, nonatomic) IBOutlet UIView *logout_view;
+@property (weak, nonatomic) IBOutlet UIView *bind_view;
+@property (weak, nonatomic) IBOutlet UILabel *logout_label;
+@property (weak, nonatomic) IBOutlet UIView *contact_view;
+
+@property (nonatomic, copy) SSSettingVCBlock block;
+@property (weak, nonatomic) IBOutlet UILabel *status_label;
+
+@end

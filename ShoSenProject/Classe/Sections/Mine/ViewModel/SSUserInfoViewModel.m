@@ -1,0 +1,54 @@
+//
+//  SSUserInfoViewModel.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/28.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSUserInfoViewModel.h"
+#import "SSFlagsModel.h"
+
+@implementation SSUserInfoViewModel
+
+- (void)feltFlags:(void(^)(NSMutableArray *data_arrray))callBack
+{
+    NSDictionary *params = @{@"type":@"1"};
+    [FZHttpTool get:BaseDictionary parameters:params isShowHUD:YES httpToolSuccess:^(id json) {
+        NSMutableArray *data_array = [SSFlagsModel mj_objectArrayWithKeyValuesArray:json[@"data"]];
+        callBack(data_array);
+     } failure:^(NSError *error) {
+     }];
+}
+
+- (void)feltStatus:(void(^)(NSMutableArray *data_arrray))callBack
+{
+    NSDictionary *params = @{@"type":@"2"};
+    [FZHttpTool get:BaseDictionary parameters:params isShowHUD:YES httpToolSuccess:^(id json) {
+        NSMutableArray *data_array = [SSFlagsModel mj_objectArrayWithKeyValuesArray:json[@"data"]];
+        callBack(data_array);
+    } failure:^(NSError *error) {
+    }];
+}
+
+- (void)updateUserInfoHeaderImage:(NSString *)imageFile nickName:(NSString *)nikname signature:(NSString *)signature sex:(NSString *)sex status:(NSString *)status location:(NSString *)province city:(NSString *)city flags:(NSMutableArray *)flags callback:(void(^)(id object))callBack
+{
+    NSMutableArray *flagArray = [[NSMutableArray alloc]init];
+    [flags enumerateObjectsUsingBlock:^(SSFlagsModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (model.isSelect) {
+            [flagArray addObject:model.dicCode];
+        }
+    }];
+    NSString *flagsString = [flagArray componentsJoinedByString:@","];
+    SSAccount *accout = [SSAccountTool share].account;
+    NSString *nickNameStr = [NSString stringWithFormat:@"%@",nikname];
+    NSDictionary *params = @{@"file":imageFile,@"name":nickNameStr,@"sign":signature,@"sex":sex,@"title":status,@"province":province,@"city":city,@"tabs":flagsString,@"id":[NSString stringWithFormat:@"%@",accout.uid]};
+    [FZHttpTool postUserInfo:UserInfoUpdateUrl parameters:params isShowHUD:YES httpToolSuccess:^(id json) {
+        
+        callBack(json);
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+@end

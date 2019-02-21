@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="KDCShopHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shop_header" translatesAutoresizingMaskIntoConstraints="NO" id="JvL-ya-pmP">
+                    <rect key="frame" x="3" y="3" width="369" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="88" id="pWZ-lf-i0T"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9900" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mje-Jy-0Md">
+                    <rect key="frame" x="15" y="21" width="345" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="o8H-MN-Iid"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前积分" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8d-82-SwY">
+                    <rect key="frame" x="15" y="57" width="345" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="H94-9P-5El"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqq-kV-J3s">
+                    <rect key="frame" x="0.0" y="105" width="375" height="10"/>
+                    <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="2Cv-ky-ct8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Mje-Jy-0Md" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="2Os-u2-A7n"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="J8d-82-SwY" secondAttribute="trailing" constant="15" id="3HM-ue-cEr"/>
+                <constraint firstItem="J8d-82-SwY" firstAttribute="top" secondItem="Mje-Jy-0Md" secondAttribute="bottom" constant="15" id="5Cb-8V-aBE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kqq-kV-J3s" secondAttribute="trailing" id="8Gh-IP-Kni"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="JvL-ya-pmP" secondAttribute="trailing" constant="3" id="Pp2-O3-0UE"/>
+                <constraint firstItem="JvL-ya-pmP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="3" id="ZH1-X4-9z0"/>
+                <constraint firstItem="JvL-ya-pmP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="3" id="aw7-nK-Etd"/>
+                <constraint firstItem="kqq-kV-J3s" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="f8A-1K-u9r"/>
+                <constraint firstAttribute="bottom" secondItem="kqq-kV-J3s" secondAttribute="bottom" id="hbG-op-lhX"/>
+                <constraint firstItem="Mje-Jy-0Md" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="21" id="lew-An-Nfr"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Mje-Jy-0Md" secondAttribute="trailing" constant="15" id="wW5-Mb-EM6"/>
+                <constraint firstItem="J8d-82-SwY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="x3q-G5-xkl"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="jifen_label" destination="Mje-Jy-0Md" id="7Cf-cy-gpm"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="shop_header" width="369" height="88"/>
+    </resources>
+</document>

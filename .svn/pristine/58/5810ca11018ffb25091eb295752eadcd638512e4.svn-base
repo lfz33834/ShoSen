@@ -1,0 +1,114 @@
+//
+//  SSPayOrderVC.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/19.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSPayOrderVC.h"
+#import "SSPayFailureVC.h"
+#import "SSPayTool.h"
+#import "SSPayFailureVC.h"
+#import "SSPaySuccessVC.h"
+#import "FZMainTabBarController.h"
+#import "FZNavigationController.h"
+#import "SSMineOrderListVC.h"
+
+@interface SSPayOrderVC ()
+
+@property (nonatomic, assign) NSInteger payType;
+@property (nonatomic, assign) NSInteger payBackType;
+
+@end
+
+@implementation SSPayOrderVC
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.payType = 1;
+    self.payBackType = 0;
+    self.pay_button.layer.cornerRadius = 5;
+    [self setTitle:@"确认支付"];
+    [SSPayTool share].block  = ^(id obj) {
+        if ([obj isEqualToString:@"取消"])
+        {
+            self.payBackType = 1;
+            [ProgressHUD showSuccess:@"支付取消"];
+        }
+    };
+    
+    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftBtn.frame = CGRectMake(0,0, 23,38);
+      [leftBtn setImage:[[UIImage imageNamed:@"home_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]  forState:UIControlStateNormal];
+    [leftBtn addTarget:self action:@selector(backsVC)forControlEvents:UIControlEventTouchUpInside];
+     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    self.navigationItem.leftBarButtonItems =@[leftItem];
+}
+
+- (void)backsVC
+{
+    if (self.payBackType == 1) {
+        FZMainTabBarController *tabVC = (FZMainTabBarController *)FZAppDelegate.window.rootViewController;
+        FZNavigationController *nav = (FZNavigationController *)[tabVC.childViewControllers objectAtIndex:tabVC.selectedIndex];
+        for (UIViewController *vc in nav.childViewControllers) {
+            if ([vc isKindOfClass:[SSMineOrderListVC class]]) {
+                [self.navigationController popToViewController:vc animated:YES];
+                return;
+            }
+        }
+        [tabVC setSelectedIndex:3];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        SSMineOrderListVC *listVC = [[SSMineOrderListVC alloc]init];
+        [[[FZRouteUrlTool share]getCurrentVC].navigationController pushViewController:listVC animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        });
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+
+- (IBAction)payButtonTapAction:(UIButton *)sender {
+    if(self.payType == 1)
+    {
+        [[SSPayTool share]wechatPayWithID:self.bookID];
+    }else if (self.payType == 2)
+    {
+        [[SSPayTool share]aliPayWithID:self.bookID];
+    }
+ }
+
+- (IBAction)weixinButtonTapAction:(UIButton *)sender {
+    self.payType = 1;
+    [self changeImageViewWithIndex:self.payType];
+}
+- (IBAction)zhifubaoButtonTapAction:(UIButton *)sender {
+    self.payType = 2;
+    [self changeImageViewWithIndex:self.payType];
+}
+
+- (void)changeImageViewWithIndex:(NSInteger )index
+{
+    if (self.payType == 1) {
+        self.weixin_imageview.image = [UIImage imageNamed:@"home_pay_select"];
+        self.zhifubao_imageview.image = [UIImage imageNamed:@"mine_order_normal"];
+    }else{
+        self.weixin_imageview.image = [UIImage imageNamed:@"mine_order_normal"];
+        self.zhifubao_imageview.image = [UIImage imageNamed:@"home_pay_select"];
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+
+
+@end

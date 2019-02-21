@@ -1,0 +1,116 @@
+//
+//  SSRuleOneCell.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/10/8.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSRuleOneCell.h"
+
+@implementation SSRuleOneCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    //
+    self.content_label.numberOfLines = 0;
+    self.content_label.textColor = kColor(@"333333");
+    self.content_label.font = [UIFont systemFontOfSize:15];
+  
+}
+
+
+- (void)initWithCellWithType:(SSRuleOneCellType)type
+{
+    if (type == SSRuleOneCellTypeTwo) {
+        NSString *string = @"1、邀请的好友成功购车，成为车主后即为分享成功；分享成功后可立即获得购车津贴\n\n2、津贴奖励方式。\n\n分享成功一台车,奖励津贴1000元/月,最高可领6个月\n分享成功二台车,奖励津贴2000元/月,最高可领9个月\n分享成功三台车,奖励津贴3000元/月,最高可领12个月\n分享成功四台车,奖励津贴4000元/月,最高可领18个月\n分享成功五台车,奖励津贴5000元/月,最高可领24个月\n分享成功六台车,奖励津贴6000元/月,最高可领30个月\n分享成功一台车,奖励津贴7000元/月,最高可领36个月\n";
+        NSDictionary *attributedDict1 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:12],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict2 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict3 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:16],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict4 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:18],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict5 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:20],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict6 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:22],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict7 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:24],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+        [attributedString addAttributes:attributedDict1 range:NSMakeRange(63, 4)];
+        [attributedString addAttributes:attributedDict2 range:NSMakeRange(63 + 28, 4)];
+        [attributedString addAttributes:attributedDict3 range:NSMakeRange(63 + 28*2, 4)];
+        [attributedString addAttributes:attributedDict4 range:NSMakeRange(63 + 28*3 + 1, 4)];
+        [attributedString addAttributes:attributedDict5 range:NSMakeRange(63 + 28*4 + 2, 4)];
+        [attributedString addAttributes:attributedDict6 range:NSMakeRange(63 + 28*5 + 3, 4)];
+        [attributedString addAttributes:attributedDict7 range:NSMakeRange(63 + 28*6 + 4, 4)];
+        
+        self.content_label.attributedText = attributedString;
+    }else{
+        self.content_label.font = [UIFont systemFontOfSize:14];
+
+        NSString *string = @"分享一台，车补１000元/月，最高可领6个月\n分享二台，车补２000元/月，最高可领9个月\n分享三台，车补3000元/月，最高可领12个月\n分享四台，车补4000元/月，最高可领18个月\n分享五台，车补5000元/月，最高可领24个月\n分享六台，车补6000元/月，最高可领30个月\n分享七台，车补7000元/月，最高可领36个月\n";
+        NSDictionary *attributedDict1 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:12],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict2 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict3 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:16],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict4 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:18],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict5 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:20],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict6 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:22],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSDictionary *attributedDict7 = @{
+                                          NSFontAttributeName:[UIFont systemFontOfSize:24],
+                                          NSForegroundColorAttributeName:kColor(@"D6B35B"),
+                                          };
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+        [attributedString addAttributes:attributedDict1 range:NSMakeRange(7, 4)];
+        [attributedString addAttributes:attributedDict2 range:NSMakeRange(7 + 23, 4)];
+        [attributedString addAttributes:attributedDict3 range:NSMakeRange(7 + 23*2, 4)];
+        [attributedString addAttributes:attributedDict4 range:NSMakeRange(7 + 23*3 + 1, 4)];
+        [attributedString addAttributes:attributedDict5 range:NSMakeRange(7 + 23*4 + 2, 4)];
+        [attributedString addAttributes:attributedDict6 range:NSMakeRange(7 + 23*5 + 3, 4)];
+        [attributedString addAttributes:attributedDict7 range:NSMakeRange(7 + 23*6 + 4, 4)];
+        
+        self.content_label.attributedText = attributedString;
+    }
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

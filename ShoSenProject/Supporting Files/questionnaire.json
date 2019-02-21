@@ -1,0 +1,282 @@
+[
+  {
+    "title": "1、如果您近期打算购车，哪些项目是您主要考虑的?",
+    "subjectId":"5",
+    "spanCount": 3,
+    "type": 0,
+    "data": [
+             {
+             "answerID":"501",
+             "answerValue":"安全性能"
+             },
+             {
+             "answerID":"502",
+             "answerValue":"操控性能"
+             },
+             {
+             "answerID":"503",
+             "answerValue":"价格"
+             },
+             {
+             "answerID":"504",
+             "answerValue":"内部空间"
+             },
+             {
+             "answerID":"505",
+             "answerValue":"售后服务"
+             },
+             {
+             "answerID":"506",
+             "answerValue":"智能系统"
+             },
+             {
+             "answerID":"507",
+             "answerValue":"内饰风格"
+             },
+             {
+             "answerID":"508",
+             "answerValue":"车辆外观"
+             }
+             ]
+  },
+  {
+    "title": "2、请问在汽车内饰设计中您更倾向于哪种控制方式?",
+    "subjectId":"6",
+    "spanCount": 1,
+    "type": 0,
+    "data": [
+             {
+             "answerID":"601",
+             "answerValue":"传统实体按键方式"
+             },
+             {
+             "answerID":"602",
+             "answerValue":"触控面板震动反馈方式"
+             },
+             {
+             "answerID":"603",
+             "answerValue":"触摸屏方式"
+             },
+             {
+             "answerID":"604",
+             "answerValue":"语音控制方式"
+             }
+             ]
+  },
+  {
+    "title": "3、请问您选择新能源汽车，您最希望后排空间具备哪种功能?",
+    "spanCount": 2,
+    "subjectId":"7",
+    "type": 0,
+    "data": [
+             {
+             "answerID":"701",
+             "answerValue":"更大的储物功能"
+             },
+             {
+             "answerID":"702",
+             "answerValue":"视听娱乐功能"
+             },
+             {
+             "answerID":"703",
+             "answerValue":"座椅位置调节功能"
+             },
+             {
+             "answerID":"704",
+             "answerValue":"小型办公功能区域"
+             }
+             ]
+  },
+  {
+    "title": "4、请问在汽车内饰及座椅用料方面您更倾向于哪种材质?",
+    "spanCount": 1,
+    "subjectId":"8",
+    "type": 0,
+    "data": [
+             {
+             "answerID":"801",
+             "answerValue":"传统皮质内饰"
+             },
+             {
+             "answerID":"802",
+             "answerValue":"织物材质内饰"
+             },
+             {
+             "answerID":"803",
+             "answerValue":"Alcantara拼接传统皮质内饰"
+             },
+             {
+             "answerID":"804",
+             "answerValue":"传统皮质拼接织物材质内饰"
+             }
+             ]
+  },
+  {
+    "title": "5、请问您对座椅功能方面，更希望具有哪种功能?",
+    "spanCount": 2,
+    "subjectId":"9",
+    "type": 0,
+    "data": [
+             {
+             "answerID":"901",
+             "answerValue":"电加热功能"
+             },
+             {
+             "answerID":"902",
+             "answerValue":"电制冷功能"
+             },
+             {
+             "answerID":"903",
+             "answerValue":"座椅电通风功能"
+             },
+             {
+             "answerID":"904",
+             "answerValue":"座椅按摩功能"
+             }
+             ]
+  },
+  {
+    "title": "6、请问您选择女款定制车型，您希望得到哪种功能？",
+    "spanCount": 2,
+    "subjectId":"10",
+    "type": 1,
+    "data": [
+             {
+             "answerID":"1001",
+             "answerValue":"储衣柜"
+             },
+             {
+             "answerID":"1002",
+             "answerValue":"储鞋柜"
+             },
+             {
+             "answerID":"1003",
+             "answerValue":"小型梳妆台"
+             },
+             {
+             "answerID":"1004",
+             "answerValue":"私密更衣空间"
+             },
+             {
+             "answerID":"1005",
+             "answerValue":"雨伞收纳功能"
+             },
+             {
+             "answerID":"1006",
+             "answerValue":"更大的化妆镜"
+             },
+             {
+             "answerID":"1007",
+             "answerValue":"婴儿护理区"
+             }
+             ]
+  },
+  {
+    "title": "7、您最希望新能源汽车具有下列哪些功能？",
+    "spanCount": 2,
+    "subjectId":"11",
+    "type": 1,
+    "data": [
+             {
+             "answerID":"1101",
+             "answerValue":"GPS系统"
+             },
+             {
+             "answerID":"1102",
+             "answerValue":"辅助停车功能"
+             },
+             {
+             "answerID":"1103",
+             "answerValue":"汽车安全系统"
+             },
+             {
+             "answerID":"1104",
+             "answerValue":"影音播放功能"
+             },
+             {
+             "answerID":"1105",
+             "answerValue":"Wi-Fi网络连接"
+             },
+             {
+             "answerID":"1106",
+             "answerValue":"人工智能系统"
+             },
+             {
+             "answerID":"1107",
+             "answerValue":"手机交互APP功能"
+             },
+             {
+             "answerID":"1108",
+             "answerValue":"无人驾驶"
+             }
+             ]
+  },
+  {
+    "title": "8、汽车场馆商务功能中，您最感兴趣哪几个？",
+    "spanCount": 1,
+    "subjectId":"12",
+    "type": 1,
+     "data":[
+             {
+             "answerID":"1201",
+             "answerValue":"用大型会议室"
+             },
+             {
+             "answerID":"1202",
+             "answerValue":"使用高端私密洽谈室"
+             },
+             {
+             "answerID":"1203",
+             "answerValue":"个人及企业广告展示位"
+             },
+             {
+             "answerID":"1204",
+             "answerValue":"定制高端商务餐饮"
+             },
+             {
+             "answerID":"1205",
+             "answerValue":"健身区"
+             },
+             {
+             "answerID":"1206",
+             "answerValue":"娱乐体验区"
+             },
+             {
+             "answerID":"1207",
+             "answerValue":"私人休息区"
+             }
+             ]
+  },
+  {
+    "title": "9、对于国产的新能源中高端商务车，您期待其在驾驶性能上有哪些优势？",
+    "spanCount": 1,
+    "subjectId":"13",
+    "type": 1,
+    "data": [
+             {
+             "answerID":"1301",
+             "answerValue":"续航能力 公里数"
+             },
+             {
+             "answerID":"1302",
+             "answerValue":"人工智能"
+             },
+             {
+             "answerID":"1303",
+             "answerValue":"动力体验"
+             },
+             {
+             "answerID":"1304",
+             "answerValue":"操作性强"
+             },
+             {
+             "answerID":"1305",
+             "answerValue":"售后能力强"
+             },
+             {
+             "answerID":"1306",
+             "answerValue":"拥有更强大的附加社交属性"
+             }
+             ]
+  }
+ ]

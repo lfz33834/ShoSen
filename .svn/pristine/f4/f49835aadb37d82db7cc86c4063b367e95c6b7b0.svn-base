@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SSPayFailureVC">
+            <connections>
+                <outlet property="bg_view" destination="ANm-yy-Umh" id="lZa-f4-i9b"/>
+                <outlet property="lookButton" destination="WdN-Ls-7Ln" id="FTM-65-919"/>
+                <outlet property="view" destination="f3R-e5-SCY" id="YQm-dx-dp7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="f3R-e5-SCY">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANm-yy-Umh">
+                    <rect key="frame" x="42" y="135" width="291" height="304"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_pay_failure" translatesAutoresizingMaskIntoConstraints="NO" id="QaT-Bq-9Gl">
+                            <rect key="frame" x="68" y="55" width="155" height="110"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="155" id="Rd3-QT-9kM"/>
+                                <constraint firstAttribute="height" constant="110" id="l24-lw-0vq"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付失败" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhP-0z-xHn">
+                            <rect key="frame" x="15" y="189" width="261" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="F4c-4s-Wqr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdN-Ls-7Ln">
+                            <rect key="frame" x="58" y="235" width="175" height="38"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="38" id="gQM-ZG-fNm"/>
+                                <constraint firstAttribute="width" constant="175" id="qrC-xb-HTD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="查看订单">
+                                <color key="titleColor" red="0.83921568629999999" green="0.70196078429999997" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="lookButtonTapAction:" destination="-1" eventType="touchUpInside" id="U6m-f3-1xp"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="OhP-0z-xHn" firstAttribute="leading" secondItem="ANm-yy-Umh" secondAttribute="leading" constant="15" id="DOg-fu-sWv"/>
+                        <constraint firstItem="QaT-Bq-9Gl" firstAttribute="centerX" secondItem="ANm-yy-Umh" secondAttribute="centerX" id="KCf-aI-MLN"/>
+                        <constraint firstAttribute="trailing" secondItem="OhP-0z-xHn" secondAttribute="trailing" constant="15" id="NXp-mt-8xc"/>
+                        <constraint firstItem="WdN-Ls-7Ln" firstAttribute="top" secondItem="OhP-0z-xHn" secondAttribute="bottom" constant="25" id="PRY-OK-0pk"/>
+                        <constraint firstAttribute="height" constant="304" id="Qsb-j5-A7y"/>
+                        <constraint firstItem="QaT-Bq-9Gl" firstAttribute="top" secondItem="ANm-yy-Umh" secondAttribute="top" constant="55" id="UU4-wb-C99"/>
+                        <constraint firstItem="OhP-0z-xHn" firstAttribute="top" secondItem="QaT-Bq-9Gl" secondAttribute="bottom" constant="24" id="fWi-3U-UrW"/>
+                        <constraint firstItem="WdN-Ls-7Ln" firstAttribute="centerX" secondItem="ANm-yy-Umh" secondAttribute="centerX" id="znb-qz-N59"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ANm-yy-Umh" firstAttribute="leading" secondItem="f3R-e5-SCY" secondAttribute="leading" constant="42" id="VdT-EK-ZDe"/>
+                <constraint firstItem="ANm-yy-Umh" firstAttribute="top" secondItem="f3R-e5-SCY" secondAttribute="top" constant="135" id="dIh-cp-ByW"/>
+                <constraint firstAttribute="trailing" secondItem="ANm-yy-Umh" secondAttribute="trailing" constant="42" id="jOc-Un-QvM"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="home_pay_failure" width="153" height="108"/>
+    </resources>
+</document>

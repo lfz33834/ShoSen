@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_lookin_header" translatesAutoresizingMaskIntoConstraints="NO" id="Dn6-X6-9ae">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="135" id="gm8-VN-Oj4"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免责说明：本次调查不作为最终交付服务商品时的标准依据,敬请谅解." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6o-9M-evU">
+                    <rect key="frame" x="25" y="150" width="320" height="35"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.83921568629999999" green="0.70196078429999997" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="T6o-9M-evU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="0UI-h8-ksO"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Dn6-X6-9ae" secondAttribute="trailing" id="ODC-ab-JGh"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="T6o-9M-evU" secondAttribute="trailing" constant="30" id="Qgb-23-8C4"/>
+                <constraint firstItem="Dn6-X6-9ae" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="UDA-kL-5RX"/>
+                <constraint firstItem="Dn6-X6-9ae" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="f4I-wf-moy"/>
+                <constraint firstItem="T6o-9M-evU" firstAttribute="top" secondItem="Dn6-X6-9ae" secondAttribute="bottom" constant="15" id="oi2-HK-FHK"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="T6o-9M-evU" secondAttribute="bottom" constant="5" id="xf7-CO-Ch4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="home_lookin_header" width="375" height="135"/>
+    </resources>
+</document>

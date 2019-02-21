@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSOrderFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DV0-UQ-oDg">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="55"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25元" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBG-TW-l9N">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="55"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hx-s3-51K">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="55"/>
+                            <state key="normal">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="leftButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="0Lh-56-zaY"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="8hx-s3-51K" secondAttribute="bottom" id="0hj-7T-MTo"/>
+                        <constraint firstAttribute="trailing" secondItem="8hx-s3-51K" secondAttribute="trailing" id="4cT-1b-q3b"/>
+                        <constraint firstItem="cBG-TW-l9N" firstAttribute="leading" secondItem="DV0-UQ-oDg" secondAttribute="leading" id="KNW-Wn-sTO"/>
+                        <constraint firstItem="8hx-s3-51K" firstAttribute="leading" secondItem="DV0-UQ-oDg" secondAttribute="leading" id="bkF-se-LNd"/>
+                        <constraint firstItem="cBG-TW-l9N" firstAttribute="top" secondItem="DV0-UQ-oDg" secondAttribute="top" id="kMR-RS-ezV"/>
+                        <constraint firstItem="8hx-s3-51K" firstAttribute="top" secondItem="DV0-UQ-oDg" secondAttribute="top" id="kpF-AG-maQ"/>
+                        <constraint firstAttribute="trailing" secondItem="cBG-TW-l9N" secondAttribute="trailing" id="lUN-L6-yhW"/>
+                        <constraint firstAttribute="bottom" secondItem="cBG-TW-l9N" secondAttribute="bottom" id="v4y-CW-Ugc"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srt-4D-Yyh">
+                    <rect key="frame" x="150" y="0.0" width="225" height="55"/>
+                    <color key="backgroundColor" red="0.83921568627450982" green="0.70196078431372544" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="立即预定">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="bookButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="4HT-9r-nJ1"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="DV0-UQ-oDg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Abd-Nk-6Oz"/>
+                <constraint firstAttribute="trailing" secondItem="Srt-4D-Yyh" secondAttribute="trailing" id="Ot5-fk-YGA"/>
+                <constraint firstItem="DV0-UQ-oDg" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="2:5" id="PDU-kB-zCR"/>
+                <constraint firstItem="DV0-UQ-oDg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UaK-Ay-CtT"/>
+                <constraint firstItem="Srt-4D-Yyh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dTa-Rc-h6y"/>
+                <constraint firstItem="Srt-4D-Yyh" firstAttribute="leading" secondItem="DV0-UQ-oDg" secondAttribute="trailing" id="nRZ-gg-vGs"/>
+                <constraint firstAttribute="bottom" secondItem="Srt-4D-Yyh" secondAttribute="bottom" id="vUC-pu-hhr"/>
+                <constraint firstAttribute="bottom" secondItem="DV0-UQ-oDg" secondAttribute="bottom" id="xzd-7b-cdj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="book_button" destination="Srt-4D-Yyh" id="acF-IA-teH"/>
+                <outlet property="left_button" destination="8hx-s3-51K" id="fz9-My-QPU"/>
+                <outlet property="left_label" destination="cBG-TW-l9N" id="HX1-Kw-lVC"/>
+            </connections>
+        </view>
+    </objects>
+</document>

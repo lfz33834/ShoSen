@@ -1,0 +1,49 @@
+//
+//  SSInvationCodeCell.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/17.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSInvationCodeCell.h"
+
+@implementation SSInvationCodeCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+
+    self.invation_button.layer.cornerRadius = 22;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]init];
+    [tapGesture addTarget:self action:@selector(skipRuleView)];
+    [self.rule_view addGestureRecognizer:tapGesture];
+    
+    [self.invation_button addTarget:self action:@selector(invatationButtonTapAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    NSString *num = [[NSUserDefaults standardUserDefaults]objectForKey:KIsReview];
+    if ([num intValue] == 1) {
+        self.rule_view.hidden = YES;
+    }else{
+        self.rule_view.hidden = NO;
+    }
+    
+}
+
+- (void)invatationButtonTapAction
+{
+    self.block(CodeTypeInvatation);
+}
+
+- (void)skipRuleView
+{
+    self.block(CodeTypeRule);
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

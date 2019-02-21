@@ -1,0 +1,175 @@
+
+//
+//  SSOrderDetailVC.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/14.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSOrderDetailVC.h"
+#import "SSOrderDetailCell.h"
+#import "SSOrderFooterView.h"
+#import "SSOrderDetailCancelView.h"
+#import "SSOrderDeleteView.h"
+#import "SSOrderDetailViewModel.h"
+#import "SSOrderListModel.h"
+#import "SSPayOrderVC.h"
+
+@interface SSOrderDetailVC() <UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *orderListTable;
+@property (nonatomic, strong) SSOrderFooterView *orderView;
+@property (nonatomic, strong) SSOrderDetailCancelView *cancelView;
+@property (nonatomic, strong) SSOrderDeleteView *deleteView;
+@property (nonatomic, strong) UIButton *deleteButton;
+@property (nonatomic, strong) SSOrderDetailViewModel *viewModel;
+@property (nonatomic, strong) SSOrderListModel *orderModel;
+
+@end
+
+@implementation SSOrderDetailVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setTitle:@"订单详情"];
+    self.viewModel = [[SSOrderDetailViewModel alloc]init];
+    [self.view addSubview:self.orderListTable];
+    if([self.vcType intValue] == 1)
+    {
+        [self.orderView initWithViewWithType:OrderFooterViewTypeOrderDetail operateType:0];
+        [self.view addSubview:self.orderView];
+    }else if ([self.vcType intValue] == 4)
+    {
+        [self.view addSubview:self.deleteButton];
+    }
+    [self feltOrderDetail];
+}
+
+#pragma --tableDataSource--
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SSOrderDetailCell *cell = [SSOrderDetailCell cellWithTableView:tableView];
+    cell.orderModel = self.orderModel;
+    return cell;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+#pragma --tableDelegate--
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 446;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    
+    return [UIView new];
+}
+
+- (void)deleteOrderAction
+{
+    [self.deleteView showDeleteView];
+}
+
+- (void)feltOrderDetail
+{
+    WEAKSELF
+    [self.viewModel orderDetailWithID:self.bookId returnData:^(NSDictionary *data) {
+        weakSelf.orderModel = [SSOrderListModel mj_objectWithKeyValues:data[@"data"]];
+        [weakSelf.orderListTable reloadData];
+    }];
+}
+
+- (UITableView *)orderListTable
+{
+    if (!_orderListTable) {
+        _orderListTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kwidth, kheight) style:UITableViewStylePlain];
+        _orderListTable.delegate = self;
+        _orderListTable.dataSource = self;
+        _orderListTable.backgroundColor = kColor(@"f8f8f8");
+        _orderListTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _orderListTable;
+}
+
+- (SSOrderFooterView *)orderView
+{
+    if (_orderView == nil) {
+        WEAKSELF
+        _orderView = [[NSBundle mainBundle]loadNibNamed:@"SSOrderFooterView" owner:self options:nil].lastObject;
+        _orderView.block = ^(OrderFooterOperateType type) {
+            if (type == OrderFooterOperateTypeCancel) {
+                [weakSelf.cancelView showCancelView];
+            }else if (type == OrderFooterOperateTypePay){
+                SSPayOrderVC *bookVC = [[SSPayOrderVC alloc]init];
+                bookVC.bookID = weakSelf.bookId;
+                bookVC.viewType = SSPayOrderVCTypeCar;
+                [weakSelf.navigationController pushViewController:bookVC animated:YES];
+            }
+          };
+    }
+    return _orderView;
+}
+
+- (SSOrderDetailCancelView *)cancelView
+{
+    if (_cancelView == nil) {
+        WEAKSELF
+        _cancelView = [[NSBundle mainBundle]loadNibNamed:@"SSOrderDetailCancelView" owner:self options:nil].lastObject;
+        _cancelView.frame = CGRectMake(0, 0, kwidth, kheight);
+        _cancelView.block = ^(NSString *reasonStr) {
+            [weakSelf.viewModel cancelOrderWithID:weakSelf.bookId reson:reasonStr callback:^{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }];
+        };
+    }
+    return _cancelView;
+}
+
+- (SSOrderDeleteView *)deleteView
+{
+    if (_deleteView == nil) {
+        WEAKSELF
+        _deleteView = [[NSBundle mainBundle]loadNibNamed:@"SSOrderDeleteView" owner:self options:nil].lastObject;
+        _deleteView.frame = CGRectMake(0, 0, kwidth, kheight);
+        _deleteView.block = ^{
+            [weakSelf.viewModel deleteOrderWithID:weakSelf.bookId callback:^{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }];
+        };
+    }
+    return _deleteView;
+}
+
+- (UIButton *)deleteButton
+{
+    if (_deleteButton == nil) {
+        _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_deleteButton setTitle:@"删除订单" forState:UIControlStateNormal];
+        [_deleteButton setTitleColor:kColor(@"666666") forState:UIControlStateNormal];
+        _deleteButton.backgroundColor = kColor(@"ffffff");
+        _deleteButton.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_deleteButton addTarget:self action:@selector(deleteOrderAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _deleteButton;
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    _deleteButton.frame = CGRectMake(0, kheight - kTopHeight -  55, kwidth, 55);
+    _orderView.frame = CGRectMake(0, kheight - kTopHeight - 55, kwidth, 55);
+
+
+}
+
+@end

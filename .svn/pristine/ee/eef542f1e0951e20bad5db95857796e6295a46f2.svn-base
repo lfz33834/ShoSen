@@ -1,0 +1,160 @@
+//
+//  MacroUrlAndConfigure.h
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/4.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#ifndef MacroUrlAndConfigure_h
+#define MacroUrlAndConfigure_h
+
+
+#ifdef DEBUG
+
+//#define BaseUrl     @"https://39.104.62.133:8092"
+#define BaseUrl     @"https://192.168.1.160:8092"
+//#define BaseUrl     @"https://192.168.1.67:8092"
+
+#define LoginUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/login/validate"]
+#define LoginCodeUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/login/code"]
+#define UserBookUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/book"]
+#define UserBookDetailUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/bookDetail"]
+#define UserBookListUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/bookList"]
+#define UserBookCancelUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/cancelBook"]
+#define UserBookDeleteUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/delBook"]
+#define BaseConfigUrl          [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/configBean"]
+#define BaseRemainOwner         [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/remainOwner"]
+#define BaseDictionary  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/dictionary"]
+#define UserInfoUpdateUrl  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/editUser"]
+#define UserAlipayBookUrl [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/appAliPayBook"]
+#define UserWechatBookUrl [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/appWxPayBook"]
+#define UserInfoUrl [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/selectUserByPhone"]
+#define UserLogout  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/login/logout"]
+#define UserRewardList  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/rewardList"]
+#define UserRewardTotal  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/rewardTotal"]
+#define UserUpdateAddInfo  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/selectUserByPhone"]
+#define UserBindWechatUrl  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/weChat/register"]
+#define UserLoginWechatUrl  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/weChat/login"]
+#define UserRewardList  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/rewardList"]
+#define UserRewardTotal  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/rewardTotal"]
+#define UserWechaUnlock  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/weChatUnLock"]
+#define UserCircleMessageList [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/selectMess"]//消息列表
+#define UserCircleMessageComm [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/selectComm"]//评论列表
+#define UserCircleAddComment [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/addComment"]//添加平路
+#define UserCircleDelComment [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/delComment"]//删除评论
+#define UserCircleDelMess [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/delMess"]//删除朋友圈消息
+#define UserCircleAddMess [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/addMess"]//发布朋友圈消息
+#define UserCircleFollowList [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/followList"]//关注列表
+#define UserCircleDelFollow [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/delFollow"]//取消关注
+#define UserCircleAddFollow [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/addFollow"]//取消关注
+#define UserCircleUploadImageView [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/upload"]//上传图片
+#define UserCircleUploadImageViewArray [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/uploadFiles"]//上传多张图片
+
+#define UserCircleGetCountByUserId [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/getCountByUserId"]//获取圈子的个人信息
+#define UserCircleFriendInvitation [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/friendInvi"]//好友的推荐列表
+#define UserCircleSlefFollow [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/selfFollow"]//个人关注列表
+#define UserCircleSlefMessage [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/selfMess"]//个人消息列表
+#define UserCircleHotTop [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/hotTop"]//热门话题
+#define UserCircleBannerList [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/bannerList"]//轮播图列表
+#define UserCircleUpdateCommentMark [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/updateCommentMark"]//评论点赞
+#define UserCircleUpdateMessMark [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/updateMessMark"]//朋友圈点赞
+#define UserCircleMyReMesss [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/myReMesss"]//我的消息列表
+#define UserCircleMoreFollow [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/moreFollow"]//更多关注
+#define UserCircleReportAndBlacklist [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/defriendAndComplain"]//举报拉黑
+#define UserCircleCancelBlacklist [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/cancelDefriend"]//取消拉黑
+#define UserCircleSelectFans [NSString stringWithFormat:@"%@%@",BaseUrl,@"/circle/selectFans"]//粉丝列表
+
+
+#define KConfigNoticeKey @"ConfigNotice"
+#define KConfigRemainNumKey @"ConfigRemainNum"
+
+#else
+
+#define BaseUrl     @"https://39.104.62.133:8092"
+//#define BaseUrl     @"https://192.168.1.160:8092"
+//#define BaseUrl     @"https://192.168.1.67:8092"
+
+#define LoginUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/login/validate"]
+#define LoginCodeUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/login/code"]
+#define UserBookUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/book"]
+#define UserBookDetailUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/bookDetail"]
+#define UserBookListUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/bookList"]
+#define UserBookCancelUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/cancelBook"]
+#define UserBookDeleteUrl    [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/delBook"]
+#define BaseConfigUrl          [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/configBean"]
+#define BaseDictionary  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/dictionary"]
+#define UserInfoUpdateUrl  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/editUser"]
+#define UserAlipayBookUrl [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/appAliPayBook"]
+#define UserWechatBookUrl [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/appWxPayBook"]
+#define UserInfoUrl [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/selectUserByPhone"]
+#define UserLogout  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/login/logout"]
+#define UserRewardList  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/rewardList"]
+#define UserRewardTotal  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/user/rewardTotal"]
+#define UserWechaUnlock  [NSString stringWithFormat:@"%@%@",BaseUrl,@"/base/weChatUnLock"]
+
+#define KConfigNoticeKey @"ConfigNotice"
+
+#endif
+
+
+
+
+#ifdef DEBUG /*! 线下环境APPKey */
+
+static  NSString * const UMengKey = @"5bbc7844f1f5564f9e000075";
+//ShareSDK
+static NSString *const kShareSDKAppKey = @"1afc5dbca127b";
+static NSString *const kSaareSDKSecret =@"5bfaa12b4aa99b6c3399d9fb42365505";
+//Bugly
+static NSString *const  kBuglyKey = @"50234d22f3";
+//JPush
+static NSString *const  kPushAppKey = @"79446fb98e29ac9cb5fbd8ee";
+static NSString *const  kPushChannel = @"appStore";
+static NSString *const  kPushProduction = @"0";
+//微博
+static NSString *kWeiboAppKey = @"1356884224";
+static NSString *kWeiboAppSecret = @"be014d0579f01766a146f65cffe404f9";
+static NSString *kWeiboResirectURI = @"http://m.qschou.com/page/aid?from=app";
+// 微信 真实的
+static NSString *kWechatAppID = @"wx482945bce5f90e1b";
+static NSString *kWechatAppSecret = @"c77f05ea6aadcb1833f2adb7e1ffe271";
+//支付宝
+static NSString *kAlipaySchemes = @"2018012602082501";
+//QQ开放平台
+static NSString *kQQConnectAppKey = @"1105311506";
+static NSString *kQQConnectAppSecret = @"a4KttsALp5yqNEji";
+//JSPatch
+static NSString *KJSPatchAppKey = @"91c064e59a6d59fa";
+
+#else  /*! 线上环境APPKey */
+
+//友盟统计
+static  NSString * const UMengKey = @"5bbc7844f1f5564f9e000075";
+//ShareSDK
+static NSString *const kShareSDKAppKey = @"1afc5dbca127b";
+static NSString *const kSaareSDKSecret =@"5bfaa12b4aa99b6c3399d9fb42365505";
+//Bugly
+static NSString *const  kBuglyKey = @"9145c0a0ab";
+//JPush   线上 ：64bf653603c2241f474b148f
+static NSString *const  kPushAppKey = @"64bf653603c2241f474b148f";
+static NSString *const  kPushChannel = @"appStore";
+static NSString *const  kPushProduction = @"0";
+//微博
+static NSString *kWeiboAppKey = @"1356884224";
+static NSString *kWeiboAppSecret = @"be014d0579f01766a146f65cffe404f9";
+static NSString *kWeiboResirectURI = @"http://m.qschou.com/page/aid?from=app";
+// 微信 真实的
+static NSString *kWechatAppID = @"wx482945bce5f90e1b";
+static NSString *kWechatAppSecret = @"c77f05ea6aadcb1833f2adb7e1ffe271";
+//QQ开放平台
+static NSString *kQQConnectAppKey = @"1105311506";
+static NSString *kQQConnectAppSecret = @"a4KttsALp5yqNEji";
+//JSPatch
+static NSString *KJSPatchAppKey = @"91c064e59a6d59fa";
+//支付宝
+static NSString *kAlipaySchemes = @"2018012602082501";
+#endif
+
+
+#endif /* MacroUrlAndConfigure_h */

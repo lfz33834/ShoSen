@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSCircleBlackListView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pFU-m4-wid">
+                    <rect key="frame" x="50" y="241" width="275" height="185"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认拉黑该用户？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wl-H4-MWe">
+                            <rect key="frame" x="10" y="25" width="255" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="t7J-qz-sNb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拉黑后，该用户不能关注您，也 无法给您发送任何消息！" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbV-n5-fcW">
+                            <rect key="frame" x="20" y="66" width="235" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="U2K-yQ-t4L"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ma-oh-Uxj">
+                            <rect key="frame" x="24" y="135" width="88" height="30"/>
+                            <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="88" id="TfY-qf-mbe"/>
+                                <constraint firstAttribute="height" constant="30" id="fML-Mn-We3"/>
+                            </constraints>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXu-zD-Cmg">
+                            <rect key="frame" x="163" y="135" width="88" height="30"/>
+                            <color key="backgroundColor" red="0.83921568629999999" green="0.70196078429999997" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="88" id="7gr-mi-Yix"/>
+                                <constraint firstAttribute="height" constant="30" id="ohM-bh-dBo"/>
+                            </constraints>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="kbV-n5-fcW" firstAttribute="top" secondItem="6Wl-H4-MWe" secondAttribute="bottom" constant="20" id="1is-CB-dOw"/>
+                        <constraint firstItem="6Wl-H4-MWe" firstAttribute="leading" secondItem="pFU-m4-wid" secondAttribute="leading" constant="10" id="6Al-vf-mo3"/>
+                        <constraint firstAttribute="bottom" secondItem="0Ma-oh-Uxj" secondAttribute="bottom" constant="20" id="Axa-4a-6zY"/>
+                        <constraint firstAttribute="bottom" secondItem="EXu-zD-Cmg" secondAttribute="bottom" constant="20" id="Bav-o1-MM5"/>
+                        <constraint firstAttribute="height" constant="185" id="LR6-Pu-7l0"/>
+                        <constraint firstAttribute="trailing" secondItem="6Wl-H4-MWe" secondAttribute="trailing" constant="10" id="O8b-My-0gq"/>
+                        <constraint firstItem="kbV-n5-fcW" firstAttribute="leading" secondItem="pFU-m4-wid" secondAttribute="leading" constant="20" id="jgc-75-ehf"/>
+                        <constraint firstAttribute="trailing" secondItem="kbV-n5-fcW" secondAttribute="trailing" constant="20" id="pUc-oF-SdS"/>
+                        <constraint firstItem="0Ma-oh-Uxj" firstAttribute="leading" secondItem="pFU-m4-wid" secondAttribute="leading" constant="24" id="r01-Ju-QFB"/>
+                        <constraint firstItem="6Wl-H4-MWe" firstAttribute="top" secondItem="pFU-m4-wid" secondAttribute="top" constant="25" id="rgV-Wi-WTo"/>
+                        <constraint firstAttribute="trailing" secondItem="EXu-zD-Cmg" secondAttribute="trailing" constant="24" id="wqz-8D-LsJ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.50466113880368102" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="pFU-m4-wid" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5h5-Xm-IAU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pFU-m4-wid" secondAttribute="trailing" constant="50" id="QIa-Wt-6bt"/>
+                <constraint firstItem="pFU-m4-wid" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="jNx-SC-CgU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="bg_view" destination="pFU-m4-wid" id="BUC-es-8lp"/>
+                <outlet property="cancel_button" destination="EXu-zD-Cmg" id="2AJ-qE-z1I"/>
+                <outlet property="confirm_button" destination="0Ma-oh-Uxj" id="kVY-Pv-ipm"/>
+            </connections>
+        </view>
+    </objects>
+</document>

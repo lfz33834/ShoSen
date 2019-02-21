@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="S7D-Jh-Zl5" customClass="SSOrderDetailCancelCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S7D-Jh-Zl5" id="f6Q-LP-56w">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_order_normal" translatesAutoresizingMaskIntoConstraints="NO" id="mDl-dc-E1P">
+                        <rect key="frame" x="0.0" y="12" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="sb8-ix-3Ec"/>
+                            <constraint firstAttribute="height" constant="20" id="yX3-pQ-YeV"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="配置或信息填错，重新选择" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n69-kc-Y0T">
+                        <rect key="frame" x="30" y="12" width="330" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="hVn-H4-LP3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="n69-kc-Y0T" firstAttribute="centerY" secondItem="f6Q-LP-56w" secondAttribute="centerY" id="Srm-0J-K8W"/>
+                    <constraint firstItem="mDl-dc-E1P" firstAttribute="centerY" secondItem="f6Q-LP-56w" secondAttribute="centerY" id="TxP-lw-lsw"/>
+                    <constraint firstItem="mDl-dc-E1P" firstAttribute="leading" secondItem="f6Q-LP-56w" secondAttribute="leading" id="bYT-t5-HlR"/>
+                    <constraint firstItem="n69-kc-Y0T" firstAttribute="leading" secondItem="mDl-dc-E1P" secondAttribute="trailing" constant="10" id="dU6-om-AsD"/>
+                    <constraint firstAttribute="trailing" secondItem="n69-kc-Y0T" secondAttribute="trailing" constant="15" id="jyQ-Vi-nh8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="content_label" destination="n69-kc-Y0T" id="I7a-s4-UUL"/>
+                <outlet property="select_imageview" destination="mDl-dc-E1P" id="Y7q-ZB-DQS"/>
+            </connections>
+            <point key="canvasLocation" x="-57" y="137"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="mine_order_normal" width="19" height="19"/>
+    </resources>
+</document>

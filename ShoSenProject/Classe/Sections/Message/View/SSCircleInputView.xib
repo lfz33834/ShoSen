@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSCircleInputView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVX-cw-PGS">
+                    <rect key="frame" x="15" y="7" width="270" height="36"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-H6-B9v">
+                            <rect key="frame" x="0.0" y="0.0" width="270" height="36"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkb-dK-UOd">
+                            <rect key="frame" x="15" y="0.0" width="80" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="aZ8-J0-brh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="写评论" image="circle_edite">
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="8Xo-H6-B9v" secondAttribute="bottom" id="70T-Oy-ifM"/>
+                        <constraint firstAttribute="trailing" secondItem="8Xo-H6-B9v" secondAttribute="trailing" id="Ijx-Ck-TvL"/>
+                        <constraint firstAttribute="bottom" secondItem="fkb-dK-UOd" secondAttribute="bottom" id="YBb-i7-Jtr"/>
+                        <constraint firstItem="8Xo-H6-B9v" firstAttribute="leading" secondItem="aVX-cw-PGS" secondAttribute="leading" id="cUf-dJ-7nc"/>
+                        <constraint firstItem="fkb-dK-UOd" firstAttribute="leading" secondItem="aVX-cw-PGS" secondAttribute="leading" constant="15" id="u26-ur-Pww"/>
+                        <constraint firstItem="fkb-dK-UOd" firstAttribute="top" secondItem="aVX-cw-PGS" secondAttribute="top" id="vih-pg-ajJ"/>
+                        <constraint firstItem="8Xo-H6-B9v" firstAttribute="top" secondItem="aVX-cw-PGS" secondAttribute="top" id="zOl-QK-Uty"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVO-Ix-0Wl">
+                    <rect key="frame" x="295" y="0.0" width="65" height="50"/>
+                    <inset key="imageEdgeInsets" minX="-14" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="12" image="circle_comment">
+                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="messagebuttongtapAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="UnC-SD-8TF"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TVO-Ix-0Wl" secondAttribute="trailing" constant="15" id="1GH-wb-SPN"/>
+                <constraint firstItem="aVX-cw-PGS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="6aj-LR-yt4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aVX-cw-PGS" secondAttribute="trailing" constant="90" id="C4C-5c-NjO"/>
+                <constraint firstItem="aVX-cw-PGS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="EwD-xG-tby"/>
+                <constraint firstItem="TVO-Ix-0Wl" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="LdI-56-Eq8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="TVO-Ix-0Wl" secondAttribute="bottom" id="Osy-mz-hmR"/>
+                <constraint firstAttribute="bottom" secondItem="aVX-cw-PGS" secondAttribute="bottom" constant="7" id="jzm-cz-vc7"/>
+                <constraint firstItem="TVO-Ix-0Wl" firstAttribute="leading" secondItem="aVX-cw-PGS" secondAttribute="trailing" constant="10" id="yF6-2q-ZLy"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="content_textview" destination="8Xo-H6-B9v" id="lPg-Ul-eNi"/>
+                <outlet property="edite_view" destination="aVX-cw-PGS" id="OI6-zc-75b"/>
+                <outlet property="message_button" destination="TVO-Ix-0Wl" id="aWf-xY-Cgt"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="circle_comment" width="23" height="21"/>
+        <image name="circle_edite" width="15" height="15"/>
+    </resources>
+</document>

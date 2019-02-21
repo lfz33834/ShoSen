@@ -1,0 +1,99 @@
+//
+//  SSSettingVC.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/26.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSSettingVC.h"
+
+@interface SSSettingVC ()
+
+{
+    NSInteger type;
+}
+
+@end
+
+@implementation SSSettingVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setTitle:@"设置"];
+    
+    SSAccount *account = [SSAccountTool share].account;
+    if (account) {
+        self.logout_label.text = @"退出登录";
+        type = 1;
+    }else{
+        self.logout_label.text = @"请登录";
+        type = 0;
+    }
+    
+    if (account.openId.length > 0) {
+        self.status_label.text = @"解绑";
+    }else{
+        self.status_label.text = @"去绑定";
+    }
+    
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]init];
+    [tapGesture addTarget:self action:@selector(gestureTapAction)];
+    [self.logout_view addGestureRecognizer:tapGesture];
+    
+    UITapGestureRecognizer *bindGesture = [[UITapGestureRecognizer alloc]init];
+    [bindGesture addTarget:self action:@selector(bindGesturTapAction)];
+    [self.bind_view addGestureRecognizer:bindGesture];
+}
+
+- (void)bindGesturTapAction
+{
+    SSAccount *account = [SSAccountTool share].account;
+    if (account.openId.length > 0) {
+        self.status_label.text = @"解绑";
+        [FZHttpTool post:UserWechaUnlock parameters:nil isShowHUD:YES httpToolSuccess:^(id  _Nullable json) {
+            
+        } failure:^(NSError * _Nullable error) {
+        }];
+    }else{
+        self.status_label.text = @"去绑定";
+        
+    }
+}
+
+- (void)gestureTapAction
+{
+    if (type == 1) {
+        [[FZAlertTool share]alertView:@"提示" message:@"是否确定退出" cancelTitle:@"取消" confirm:@"确定" resultBlock:^(WCNoticeAlertViewType alertType) {
+            if (alertType == WCNoticeAlertViewTypeCancel) {
+//                [ProgressHUD showError:@""];
+            }else if(alertType == WCNoticeAlertViewTypeConfirm){
+                [FZHttpTool post:UserLogout parameters:nil isShowHUD:YES httpToolSuccess:^(id json) {
+
+                    [[SSAccountTool share]logoutAccount];
+//                    SSLoginVC *loginVC = [[SSLoginVC alloc]init];
+//                    loginVC.block = ^{
+                        self.logout_label.text = @"退出登录";
+                        type = 1;
+//                    };
+                    [self.navigationController popViewControllerAnimated:YES];
+                    self.block();
+//                    [self.navigationController pushViewController:loginVC animated:YES];
+                } failure:^(NSError *error) {
+                    [ProgressHUD showSuccess:@"请求失败"];
+                }];
+            }
+        }];
+    }else{
+        SSLoginVC *loginVC = [[SSLoginVC alloc]init];
+        loginVC.fromVC = SSLoginVCFromSetting;
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+@end

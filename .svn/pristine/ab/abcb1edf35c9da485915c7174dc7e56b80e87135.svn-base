@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ooX-dv-OxU" customClass="SSInvationCodeCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ooX-dv-OxU" id="Iia-ox-zRM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="699.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请好友成为车主" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sB-F2-BmM">
+                        <rect key="frame" x="35" y="25" width="305" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="ATk-Er-gRm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                        <color key="textColor" red="0.83921568629999999" green="0.70196078429999997" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="得购车津贴款 多邀多得" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="na4-A1-aQA">
+                        <rect key="frame" x="45" y="75" width="285" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Vuk-fB-9wG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ij8-gW-gJu">
+                        <rect key="frame" x="0.0" y="319" width="375" height="118"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5H-tL-rze">
+                                <rect key="frame" x="70.5" y="16" width="234" height="102"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhy-XB-iY7">
+                                        <rect key="frame" x="77" y="22" width="80" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="kTD-Sx-aF7"/>
+                                            <constraint firstAttribute="width" constant="80" id="les-RZ-Cwz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WER2133" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KOi-uz-2zJ">
+                                        <rect key="frame" x="15" y="66" width="204" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="8f2-rj-IcQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="KOi-uz-2zJ" secondAttribute="trailing" constant="15" id="5DV-RO-8nN"/>
+                                    <constraint firstItem="Yhy-XB-iY7" firstAttribute="centerX" secondItem="Y5H-tL-rze" secondAttribute="centerX" id="BLl-E9-jSH"/>
+                                    <constraint firstAttribute="height" constant="102" id="WOX-vd-1Rl"/>
+                                    <constraint firstItem="KOi-uz-2zJ" firstAttribute="leading" secondItem="Y5H-tL-rze" secondAttribute="leading" constant="15" id="aAc-87-8zx"/>
+                                    <constraint firstItem="Yhy-XB-iY7" firstAttribute="top" secondItem="Y5H-tL-rze" secondAttribute="top" constant="22" id="ami-9n-itJ"/>
+                                    <constraint firstItem="KOi-uz-2zJ" firstAttribute="top" secondItem="Yhy-XB-iY7" secondAttribute="bottom" constant="28" id="gP4-0I-VhR"/>
+                                    <constraint firstAttribute="width" constant="234" id="zdE-MG-oGR"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_invitationcode_right" translatesAutoresizingMaskIntoConstraints="NO" id="tdL-Yv-X4Q">
+                                <rect key="frame" x="302.5" y="82" width="45" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="oVe-hr-RDl"/>
+                                    <constraint firstAttribute="height" constant="36" id="quF-Ur-9hn"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_invitationcode_left" translatesAutoresizingMaskIntoConstraints="NO" id="a4L-wh-sNa">
+                                <rect key="frame" x="27.5" y="82" width="45" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="0eh-Dp-n9T"/>
+                                    <constraint firstAttribute="height" constant="36" id="j6O-8e-TJe"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Y5H-tL-rze" firstAttribute="centerX" secondItem="ij8-gW-gJu" secondAttribute="centerX" id="0VG-mp-L7G"/>
+                            <constraint firstAttribute="bottom" secondItem="Y5H-tL-rze" secondAttribute="bottom" id="27t-4r-dN8"/>
+                            <constraint firstItem="a4L-wh-sNa" firstAttribute="trailing" secondItem="Y5H-tL-rze" secondAttribute="leading" constant="2" id="3Ge-r1-yZL"/>
+                            <constraint firstAttribute="bottom" secondItem="a4L-wh-sNa" secondAttribute="bottom" id="HQT-iU-Mck"/>
+                            <constraint firstAttribute="bottom" secondItem="tdL-Yv-X4Q" secondAttribute="bottom" id="Pf2-iD-zgr"/>
+                            <constraint firstAttribute="height" constant="118" id="saw-PY-tUj"/>
+                            <constraint firstItem="tdL-Yv-X4Q" firstAttribute="leading" secondItem="Y5H-tL-rze" secondAttribute="trailing" constant="-2" id="voN-5D-EzM"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_invitationcode_header" translatesAutoresizingMaskIntoConstraints="NO" id="uYq-hO-baz">
+                        <rect key="frame" x="96" y="140" width="182" height="189"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="182" id="Tqu-s4-rrb"/>
+                            <constraint firstAttribute="height" constant="189" id="iEN-Xs-stA"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jW-MT-fJz">
+                        <rect key="frame" x="30" y="472" width="315" height="45"/>
+                        <color key="backgroundColor" red="0.83921568629999999" green="0.70196078429999997" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="6GE-YY-pwg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title="立即邀请">
+                            <color key="titleColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E76-rI-u8U">
+                        <rect key="frame" x="145" y="542" width="85" height="16"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看规则" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TG4-SF-x8V">
+                                <rect key="frame" x="0.0" y="0.0" width="75" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="DPg-RW-98T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_cell_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="305-Ja-zzS">
+                                <rect key="frame" x="79" y="2" width="6" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="u0W-9o-IFP"/>
+                                    <constraint firstAttribute="width" constant="6" id="uvg-Ch-zQE"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TG4-SF-x8V" firstAttribute="top" secondItem="E76-rI-u8U" secondAttribute="top" id="9dC-p4-7BJ"/>
+                            <constraint firstAttribute="bottom" secondItem="TG4-SF-x8V" secondAttribute="bottom" id="GNT-le-69r"/>
+                            <constraint firstItem="305-Ja-zzS" firstAttribute="centerY" secondItem="E76-rI-u8U" secondAttribute="centerY" id="GQa-3c-XAy"/>
+                            <constraint firstAttribute="height" constant="16" id="TGa-2l-J75"/>
+                            <constraint firstAttribute="trailing" secondItem="305-Ja-zzS" secondAttribute="trailing" id="mnI-pK-3me"/>
+                            <constraint firstAttribute="width" constant="85" id="w3v-Xy-ysP"/>
+                            <constraint firstItem="TG4-SF-x8V" firstAttribute="leading" secondItem="E76-rI-u8U" secondAttribute="leading" id="zrF-et-bsb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="6jW-MT-fJz" firstAttribute="top" secondItem="ij8-gW-gJu" secondAttribute="bottom" constant="35" id="0Rl-C1-8N0"/>
+                    <constraint firstItem="3sB-F2-BmM" firstAttribute="top" secondItem="Iia-ox-zRM" secondAttribute="top" constant="25" id="1rf-q1-9mr"/>
+                    <constraint firstItem="uYq-hO-baz" firstAttribute="top" secondItem="na4-A1-aQA" secondAttribute="bottom" constant="35" id="Fzx-cc-mpH"/>
+                    <constraint firstItem="na4-A1-aQA" firstAttribute="leading" secondItem="Iia-ox-zRM" secondAttribute="leading" constant="45" id="G31-Jo-S0K"/>
+                    <constraint firstItem="E76-rI-u8U" firstAttribute="top" secondItem="6jW-MT-fJz" secondAttribute="bottom" constant="25" id="J1X-Qa-Ytb"/>
+                    <constraint firstItem="ij8-gW-gJu" firstAttribute="leading" secondItem="Iia-ox-zRM" secondAttribute="leading" id="L5z-k3-Zww"/>
+                    <constraint firstItem="E76-rI-u8U" firstAttribute="centerX" secondItem="Iia-ox-zRM" secondAttribute="centerX" id="MOo-yP-8ID"/>
+                    <constraint firstItem="3sB-F2-BmM" firstAttribute="leading" secondItem="Iia-ox-zRM" secondAttribute="leading" constant="35" id="RPr-j2-59w"/>
+                    <constraint firstAttribute="trailing" secondItem="3sB-F2-BmM" secondAttribute="trailing" constant="35" id="Vie-YN-syJ"/>
+                    <constraint firstItem="uYq-hO-baz" firstAttribute="centerX" secondItem="Iia-ox-zRM" secondAttribute="centerX" id="Vyj-N9-3rD"/>
+                    <constraint firstAttribute="trailing" secondItem="6jW-MT-fJz" secondAttribute="trailing" constant="30" id="ZKd-tQ-Efj"/>
+                    <constraint firstItem="6jW-MT-fJz" firstAttribute="leading" secondItem="Iia-ox-zRM" secondAttribute="leading" constant="30" id="hI6-yp-UW6"/>
+                    <constraint firstItem="na4-A1-aQA" firstAttribute="top" secondItem="3sB-F2-BmM" secondAttribute="bottom" constant="15" id="oAV-ud-DjE"/>
+                    <constraint firstAttribute="trailing" secondItem="na4-A1-aQA" secondAttribute="trailing" constant="45" id="rEy-Qc-c1h"/>
+                    <constraint firstAttribute="trailing" secondItem="ij8-gW-gJu" secondAttribute="trailing" id="rie-He-ADn"/>
+                    <constraint firstItem="ij8-gW-gJu" firstAttribute="top" secondItem="na4-A1-aQA" secondAttribute="bottom" constant="214" id="y6u-FP-eM8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="code_label" destination="KOi-uz-2zJ" id="gM8-Wu-1ad"/>
+                <outlet property="invation_button" destination="6jW-MT-fJz" id="YjG-vk-tGs"/>
+                <outlet property="rule_view" destination="E76-rI-u8U" id="TU8-ph-dqF"/>
+                <outlet property="subTitle_label" destination="na4-A1-aQA" id="cJ2-TJ-2zm"/>
+                <outlet property="title_label" destination="3sB-F2-BmM" id="A6V-PE-Z3b"/>
+            </connections>
+            <point key="canvasLocation" x="42" y="112"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="mine_cell_arrow" width="6" height="13"/>
+        <image name="mine_invitationcode_header" width="181" height="188"/>
+        <image name="mine_invitationcode_left" width="45" height="36"/>
+        <image name="mine_invitationcode_right" width="45" height="36"/>
+    </resources>
+</document>

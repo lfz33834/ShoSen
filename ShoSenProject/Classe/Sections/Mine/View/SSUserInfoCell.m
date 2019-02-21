@@ -1,0 +1,192 @@
+//
+//  SSUserInfoCell.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/25.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSUserInfoCell.h"
+#import "SSUserInfoItemCell.h"
+#import "SSFlagsModel.h"
+#import "ChinaPlckerView.h"
+#import "ChinaPlckerView.h"
+
+
+@interface SSUserInfoCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+
+@end
+
+@implementation SSUserInfoCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.selectNum = 0;
+    self.selectSex = 0; //0女 1男;
+    [self setUpCollectionView];
+    self.finish_button.layer.cornerRadius = 5;
+    self.header_imageview.layer.cornerRadius = 33;
+    self.header_imageview.clipsToBounds = YES;
+    
+    SSAccount *account = [SSAccountTool share].account;
+    if(account)
+    {
+        [self.header_imageview sd_setImageWithURL:[NSURL URLWithString:account.headimg] placeholderImage:[UIImage imageNamed:@"mine_header_normal"]];
+        
+        self.nickname_textfield.text = account.name;
+        self.content_textfield.text = account.sign;
+        if ([account.sex intValue] == 1) {
+            self.selectSex = 1;
+            [self.man_button setImage:[UIImage imageNamed:@"mine_userinfo_select"] forState:UIControlStateNormal];
+            [self.women_button setImage:[UIImage imageNamed:@"mine_userinfo_normal"] forState:UIControlStateNormal];
+        }else if ([account.sex intValue] == 0){
+            self.selectSex = 0;
+            [self.man_button setImage:[UIImage imageNamed:@"mine_userinfo_normal"] forState:UIControlStateNormal];
+            [self.women_button setImage:[UIImage imageNamed:@"mine_userinfo_select"] forState:UIControlStateNormal];
+        }
+        
+        if ([account.title intValue] == 101) {
+            self.status_label.text = @"我是车主";
+        }else if ([account.title intValue] == 102)
+        {
+            self.status_label.text = @"我要预约购车";
+        }else if ([account.title intValue] == 103)
+        {
+            self.status_label.text = @"随便看看";
+        }
+//        self.status_label.text = account.status;
+        NSString *locationStr = [NSString stringWithFormat:@"%@-%@",account.province,account.city];
+        [self.location_button setTitle:locationStr forState:UIControlStateNormal];
+    }
+    
+}
+- (IBAction)manButtonTapAction:(UIButton *)sender {
+    self.selectSex = 1;
+    [self.man_button setImage:[UIImage imageNamed:@"mine_userinfo_select"] forState:UIControlStateNormal];
+    [self.women_button setImage:[UIImage imageNamed:@"mine_userinfo_normal"] forState:UIControlStateNormal];
+}
+- (IBAction)womenButtonTapAction:(UIButton *)sender {
+    self.selectSex = 0;
+    [self.man_button setImage:[UIImage imageNamed:@"mine_userinfo_normal"] forState:UIControlStateNormal];
+    [self.women_button setImage:[UIImage imageNamed:@"mine_userinfo_select"] forState:UIControlStateNormal];
+}
+- (IBAction)statusButtonTapAction:(UIButton *)sender {
+    self.block(UserInfoTapTypeStatus);
+}
+- (IBAction)locationButtonTapAction:(UIButton *)sender {
+    self.block(UserInfoTapTypeLocation);
+}
+- (IBAction)finishButtonTapAction:(UIButton *)sender {
+    self.block(UserInfoTapTypeFinish);
+}
+
+- (void)setFlagsArray:(NSMutableArray *)flagsArray
+{
+    _flagsArray = flagsArray;
+    if (self.flagsArray.count/4 > 0) {
+        _collection_height.constant = self.flagsArray.count/4*40 + 40;
+    }else{
+        _collection_height.constant = self.flagsArray.count/4*40;
+    }
+    
+    SSAccount *account = [SSAccountTool share].account;
+    NSArray *flags = [account.tabs componentsSeparatedByString:@","];
+
+    if (account.tabs.length > 0) {
+        _selectNum = flags.count;
+    }else{
+        _selectNum = 0;
+    }
+    
+    for (int i= 0; i < flagsArray.count; i ++) {
+        SSFlagsModel *model = self.flagsArray[i];
+        for (int j = 0; j < flags.count; j ++) {
+            NSString *flagNum = flags[j];
+            if ([model.dicCode intValue] == [flagNum intValue]) {
+                model.isSelect = YES;
+//                [_flagsArray replaceObjectAtIndex:i withObject:model];
+            }
+        }
+    }
+    [_flags_collection reloadData];
+}
+
+- (void)setUpCollectionView
+{
+    UICollectionViewFlowLayout *flowLayout= [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;//滚动方向
+    flowLayout.minimumInteritemSpacing = 10.0;//item间距(最小值)
+      //第二个参数是cell的布局
+    self.flags_collection.collectionViewLayout = flowLayout;
+    self.flags_collection.dataSource = self;
+    self.flags_collection.delegate = self;
+    self.flags_collection.backgroundColor = [UIColor whiteColor];
+    UINib *nib = [UINib nibWithNibName:@"SSUserInfoItemCell" bundle: [NSBundle mainBundle]];
+    [self.flags_collection registerNib:nib forCellWithReuseIdentifier:@"SSUserInfoItemCell"];
+}
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.flagsArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SSFlagsModel *model = self.flagsArray[indexPath.row];
+    SSUserInfoItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SSUserInfoItemCell" forIndexPath:indexPath];
+    cell.itemFlag = model;
+    return cell;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%d %d", (int)indexPath.section, (int)indexPath.row);
+    SSFlagsModel *model = self.flagsArray[indexPath.row];
+    if (model.isSelect) {
+        model.isSelect = NO;
+        self.selectNum --;
+    }else{
+        if (self.selectNum < 3) {
+            model.isSelect = YES;
+            ++ self.selectNum ;
+        }else{
+            [ProgressHUD showSuccess:@"最多只能选择三个标签"];
+        }
+    }
+    [self.flagsArray replaceObjectAtIndex:indexPath.row withObject:model];
+    [self.flags_collection reloadData];
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+//定义每个UICollectionViewCell 的大小
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat with = (240 - 10*4)/3;
+    return CGSizeMake(with, 25);
+}
+
+//每个section中不同的行之间的行间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 15;
+}
+
+- (IBAction)selectHeaderImageView:(UIButton *)sender {
+    self.block(UserInfoTapTypeHeaderImage);
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

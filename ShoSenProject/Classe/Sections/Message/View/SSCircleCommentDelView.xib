@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SSCircleCommentDelView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZS-nL-A6q">
+                    <rect key="frame" x="0.0" y="577" width="375" height="90"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwy-kk-psU">
+                            <rect key="frame" x="0.0" y="45" width="375" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="uzP-1F-1Fr"/>
+                            </constraints>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.41329562883435583" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelButtonTapAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="9rg-Ds-1dh"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkT-ns-p4g">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                            <state key="normal" title="删除">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="delButtonTapAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="FGb-RY-OAX"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="iwy-kk-psU" secondAttribute="bottom" id="2LB-ou-Z0c"/>
+                        <constraint firstItem="LkT-ns-p4g" firstAttribute="leading" secondItem="OZS-nL-A6q" secondAttribute="leading" id="2Lc-3H-BTN"/>
+                        <constraint firstItem="LkT-ns-p4g" firstAttribute="top" secondItem="OZS-nL-A6q" secondAttribute="top" id="5CA-Jh-FyG"/>
+                        <constraint firstItem="iwy-kk-psU" firstAttribute="top" secondItem="LkT-ns-p4g" secondAttribute="bottom" id="A5a-KN-j9F"/>
+                        <constraint firstAttribute="trailing" secondItem="LkT-ns-p4g" secondAttribute="trailing" id="JVJ-Rl-CNL"/>
+                        <constraint firstItem="iwy-kk-psU" firstAttribute="leading" secondItem="OZS-nL-A6q" secondAttribute="leading" id="lBe-DC-Z36"/>
+                        <constraint firstAttribute="trailing" secondItem="iwy-kk-psU" secondAttribute="trailing" id="m9O-9Q-7El"/>
+                        <constraint firstAttribute="height" constant="90" id="uia-GN-PbJ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lf0-bB-ePH">
+                    <rect key="frame" x="0.0" y="621" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="ke8-kP-cnp"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.41329562883435583" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="lf0-bB-ePH" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-45" id="5EV-VG-r58"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OZS-nL-A6q" secondAttribute="trailing" id="8qS-9V-wA4"/>
+                <constraint firstItem="OZS-nL-A6q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9IG-RM-pe1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="OZS-nL-A6q" secondAttribute="bottom" id="Jdv-9h-rvZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="lf0-bB-ePH" secondAttribute="trailing" id="MAk-Y0-8qn"/>
+                <constraint firstItem="lf0-bB-ePH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Pb4-CZ-jed"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="cancel_button" destination="iwy-kk-psU" id="Qvc-q0-sw4"/>
+                <outlet property="delButton" destination="LkT-ns-p4g" id="4as-9k-Ife"/>
+            </connections>
+        </view>
+    </objects>
+</document>

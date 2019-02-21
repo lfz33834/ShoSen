@@ -1,0 +1,75 @@
+//
+//  SDAutoLayout.h
+//  SDAutoLayoutDemo
+//
+//  Created by gsd on 16/6/27.
+//  Copyright © 2016年 gsd. All rights reserved.
+//
+// -fno-objc-arc
+
+/*
+ 
+ SDAutoLayout
+ 版本：2.1.7
+ 发布：2016.08.12
+ 
+ */
+
+#ifndef SDAutoLayout_h
+#define SDAutoLayout_h
+
+//frame 和 屏幕长高
+#define kwidth [UIScreen mainScreen].bounds.size.width
+#define kheight [UIScreen mainScreen].bounds.size.height
+#define rect(x,y,w,h) CGRectMake(x, y, w, h)
+
+#define kStatusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
+#define kNavBarHeight 44.0
+#define kTabBarHeight ([[UIApplication sharedApplication] stat usBarFrame].size.height>20?83:49)
+#define kTopHeight (kStatusBarHeight + kNavBarHeight)
+
+#define kStatusAdd ([[UIApplication sharedApplication] statusBarFrame].size.height>20?24:0)
+#define kbotHight (kheight==812?34:0)
+
+//比例倍数
+#define multiple  (kheight>700?(5.5/4.7):(kheight>500?1.0:(4.0/4.7)))
+//颜色
+#define KColor(a,b,c) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:1]
+#define KRGB(A, B, C, D) [UIColor colorWithRed:A/255.0f green:B/255.0f blue:C/255.0f alpha:D]
+#define kColor(name) [UIColor colorWithHexColorString:name]
+
+
+//字体
+#define FontS(x) [UIFont systemFontOfSize:x]
+#define FontA(x) [UIFont fontWithName:@"Arial" size:x]
+#define FontH(x) [UIFont fontWithName:@"Helvetica-Bold" size:x]
+
+
+//系统
+#define ios_system [[[UIDevice currentDevice] systemVersion] floatValue]
+#define  _iPhone4     (kwidth == 320.f && kheight == 480.f ? YES : NO)
+#define  _iPhone5     (kwidth == 320.f && kheight == 568.f ? YES : NO)
+#define  _iPhone6     (kwidth == 375.f && kheight == 667.f ? YES : NO)
+#define  _iPhone6P    (kwidth == 414.f && kheight == 736.f ? YES : NO)
+#define  _iPhoneX     (kheight== 812)
+//gcd
+#define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
+#define MAIN(block) dispatch_async(dispatch_get_main_queue(),block)
+//weakself
+#define weak_Self(id) __weak typeof(id) weakSelf = id
+//image
+#define kIMG(A) [UIImage imageNamed:A]
+
+#define kColor_background kColor(@"ffffffff")
+#define kColor_gray kColor(@"ff838a90")
+#define kColor_text kColor(@"ff181818")
+#define kColor_line kColor(@"ffF4F2F4")
+#define kColor_grayBC kColor(@"ffF7F7F7")
+#define kColor_button_gray kColor(@"ffC2C2C2")
+#define kColor_liang kColor(@"ffffffff")
+
+#define  WS(weakSelf)  __weak __typeof(&*self)weakSelf = self
+
+#import "UIView+SDAutoLayout.h"
+
+#endif

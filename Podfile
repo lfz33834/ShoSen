@@ -1,0 +1,78 @@
+use_frameworks!
+platform :ios, ‘9.0’
+target 'ShoSenProject' do
+    
+pod 'ReactiveCocoa', :git => 'https://github.com/zhao0/ReactiveCocoa.git', :tag => '2.5.2'
+pod 'AFNetworking', '~> 3.1.0'
+pod 'SVProgressHUD', '~> 2.0.3'
+pod 'SDWebImage'
+pod 'MJRefresh', '~> 3.1.12'
+pod 'DZNEmptyDataSet', '~> 1.8.1'
+pod 'Reachability', '~> 3.2'
+pod 'MJExtension', '~> 3.0.15.1'
+pod 'Bugly'
+pod 'Masonry'
+pod 'IQKeyboardManager'
+#pod 'Realm', '~> 3.7.6'                              #realm数据库
+pod 'MBProgressHUD'#提示框
+pod 'WRNavigationBar'
+pod 'WechatOpenSDK'
+pod 'LXScrollContentView'
+pod 'YBImageBrowser' #图片浏览器
+pod 'BMKLocationKit' #百度地图
+pod 'BaiduMapKit' #百度地图SDK
+pod 'JPush'          #极光推送
+pod 'ZWLimitCounter'
+pod 'FDFullscreenPopGesture'
+
+#pod 'LFImagePickerController'
+
+pod 'UMCCommon'
+pod 'UMCShare/UI'
+#pod 'UMCSecurityPlugins'
+#pod 'UMCShare/Social/WeChat'
+
+## 集成微信(精简版0.2M)
+pod 'UMCShare/Social/ReducedWeChat'
+## 集成QQ/QZone/TIM(精简版0.5M)
+#pod 'UMCShare/Social/ReducedQQ'
+## 集成新浪微博(精简版1M)
+#pod 'UMCShare/Social/ReducedSina'
+
+
+#pod 'RxSwift'
+#pod 'RxCocoa'
+#pod 'NSObject+Rx'
+#pod 'Moya/RxSwift'
+#pod 'ObjectMapper'
+#pod 'RxDataSources'
+#pod 'Then'
+#pod 'Kingfisher'
+#pod 'SnapKit', '3.2.0'
+#pod 'FMDB', '~> 2.7.2'
+#pod 'RBQFetchedResultsController'                    #数据库驱动界面更新核心库
+#pod 'MLEmojiLabel'
+#pod 'NJKWebViewProgress'
+#pod 'FDFullscreenPopGesture'
+#pod 'FDStackView'
+#pod 'RSKImageCropper', '~> 1.2.1'
+#pod 'KVOController', '~> 1.0.3'
+
+
+#pod 'ShareSDK3', '~> 3.6.3'
+#pod 'MOBFoundation', '~> 2.2.19'
+#pod 'ShareSDK3/ShareSDKPlatforms/SinaWeibo'
+#pod 'ShareSDK3/ShareSDKPlatforms/QQ'
+#pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
+#pod 'UMengAnalytics'
+
+end
+
+
+post_install do |installer_representation|
+    installer_representation.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ARCHS'] = 'armv7 arm64'
+        end
+    end
+end

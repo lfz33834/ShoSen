@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="SWS-Em-vhC" customClass="SSShopCell">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="203"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="170" height="203"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Unc-77-79t">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="140"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="140" id="ogz-pq-tb7"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智能车载导航系统" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8Y-R5-t6M">
+                        <rect key="frame" x="0.0" y="150" width="170" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Myn-hj-zrA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000积分/元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87U-Ee-Wvq">
+                        <rect key="frame" x="0.0" y="176" width="170" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="NmG-bf-xKe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Unc-77-79t" firstAttribute="leading" secondItem="SWS-Em-vhC" secondAttribute="leading" id="3G3-Xh-SY3"/>
+                <constraint firstItem="87U-Ee-Wvq" firstAttribute="leading" secondItem="SWS-Em-vhC" secondAttribute="leading" id="8Y4-EX-YJe"/>
+                <constraint firstItem="87U-Ee-Wvq" firstAttribute="top" secondItem="I8Y-R5-t6M" secondAttribute="bottom" constant="5" id="Wnq-Gs-j7c"/>
+                <constraint firstItem="I8Y-R5-t6M" firstAttribute="top" secondItem="Unc-77-79t" secondAttribute="bottom" constant="10" id="ZWp-qd-Xnt"/>
+                <constraint firstItem="Unc-77-79t" firstAttribute="top" secondItem="SWS-Em-vhC" secondAttribute="top" id="fAF-ZY-ER8"/>
+                <constraint firstItem="I8Y-R5-t6M" firstAttribute="leading" secondItem="SWS-Em-vhC" secondAttribute="leading" id="ga2-O6-7s5"/>
+                <constraint firstAttribute="trailing" secondItem="I8Y-R5-t6M" secondAttribute="trailing" id="gxI-um-Tmi"/>
+                <constraint firstAttribute="trailing" secondItem="87U-Ee-Wvq" secondAttribute="trailing" id="mbI-WZ-4Ny"/>
+                <constraint firstAttribute="trailing" secondItem="Unc-77-79t" secondAttribute="trailing" id="mi2-dy-Bpb"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Zag-8G-2eo"/>
+            <connections>
+                <outlet property="header_imageview" destination="Unc-77-79t" id="a2O-7J-9s8"/>
+                <outlet property="subtitle_label" destination="87U-Ee-Wvq" id="62Y-vO-9c8"/>
+                <outlet property="title_label" destination="I8Y-R5-t6M" id="klW-pd-9Yh"/>
+            </connections>
+            <point key="canvasLocation" x="-104" y="74"/>
+        </collectionViewCell>
+    </objects>
+</document>

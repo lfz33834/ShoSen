@@ -1,0 +1,123 @@
+//
+//  SSCircleFriendHomeHeaderView.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/10/30.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSCircleFriendHomeHeaderView.h"
+#import "SSCircleViewModel.h"
+
+@interface SSCircleFriendHomeHeaderView()
+
+@property (nonatomic, strong) SSCircleViewModel *viewModel;
+
+@end
+
+@implementation SSCircleFriendHomeHeaderView
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+        
+    self.header_imageview.layer.cornerRadius = 30;
+    self.header_imageview.clipsToBounds = YES;
+    
+    self.sixin_button.layer.cornerRadius = 5;
+    self.guanzhu_button.layer.cornerRadius = 5;
+    
+    [self.sixin_button setTitleColor:kColor(@"D6B35B") forState:UIControlStateNormal];
+    self.sixin_button.layer.borderColor = kColor(@"D6B35B").CGColor;
+    self.sixin_button.layer.borderWidth = 1;
+    
+    [self.guanzhu_button setTitleColor:kColor(@"999999") forState:UIControlStateNormal];
+    self.guanzhu_button.layer.borderColor = kColor(@"999999").CGColor;
+    self.guanzhu_button.layer.borderWidth = 1;
+    [self.guanzhu_button setTitle:@"已关注" forState:UIControlStateNormal];
+    
+    [self.guanzhu_button addTarget:self action:@selector(guanzhuButtonTapAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.sixin_button addTarget:self action:@selector(sixinButtonTapAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.header_button addTarget:self action:@selector(headerButtonTapAction) forControlEvents:UIControlEventTouchUpInside];
+
+}
+
+- (void)setType:(SSCircleFriendHomeHeaderViewType)type
+{
+    if (type == SSCircleFriendHomeHeaderViewTypeSlef) {
+        _sixin_button.hidden = YES;
+        _guanzhu_button.hidden = YES;
+    }else{
+        _sixin_button.hidden = YES;
+        _guanzhu_button.hidden = NO;
+    }
+}
+
+- (void)setIsFollow:(BOOL)isFollow
+{
+    _isFollow = isFollow;
+    if (isFollow) {
+        [_guanzhu_button setTitleColor:kColor(@"999999") forState:UIControlStateNormal];
+        _guanzhu_button.layer.borderColor = kColor(@"999999").CGColor;
+        _guanzhu_button.layer.borderWidth = 1;
+        [_guanzhu_button setTitle:@"已关注" forState:UIControlStateNormal];
+    }else{
+        [_guanzhu_button setTitleColor:kColor(@"D6B35B") forState:UIControlStateNormal];
+        _guanzhu_button.layer.borderColor = kColor(@"D6B35B").CGColor;
+        _guanzhu_button.layer.borderWidth = 1;
+        [_guanzhu_button setTitle:@"+关注" forState:UIControlStateNormal];
+    }
+}
+
+- (void)initViewWithModel:(SSCircleListModel *)model
+{
+    self.listModel = model;
+    [self.header_imageview sd_setImageWithURL:[NSURL URLWithString:model.headImg] placeholderImage:[UIImage imageNamed:@"mine_header_normal"]];
+    self.title_label.text = model.name;
+}
+
+- (void)sixinButtonTapAction
+{
+    
+}
+
+- (void)headerButtonTapAction
+{
+    self.block(SSCircleHomeHeaderViewTypeHeader);
+}
+
+- (void)guanzhuButtonTapAction
+{
+    WEAKSELF
+    SSAccount *account = [SSAccountTool share].account;
+    if (self.isFollow) {
+        [self.viewModel delFollowWithUserID:account.uid follower:self.listModel.userId callBack:^(id obj) {
+            weakSelf.isFollow = NO;
+            [weakSelf.guanzhu_button setTitleColor:kColor(@"D6B35B") forState:UIControlStateNormal];
+            weakSelf.guanzhu_button.layer.borderColor = kColor(@"D6B35B").CGColor;
+            weakSelf.guanzhu_button.layer.borderWidth = 1;
+            [weakSelf.guanzhu_button setTitle:@"+关注" forState:UIControlStateNormal];
+            [ProgressHUD showSuccess:@"取消成功"];
+        }];
+    }else{
+        [self.viewModel addFollowWithUserID:account.uid follower:self.listModel.userId callBack:^(id obj) {
+            weakSelf.isFollow = YES;
+            [weakSelf.guanzhu_button setTitleColor:kColor(@"999999") forState:UIControlStateNormal];
+            weakSelf.guanzhu_button.layer.borderColor = kColor(@"999999").CGColor;
+            weakSelf.guanzhu_button.layer.borderWidth = 1;
+            [weakSelf.guanzhu_button setTitle:@"已关注" forState:UIControlStateNormal];
+            [ProgressHUD showSuccess:@"关注成功"];
+
+        }];
+    }
+}
+
+- (SSCircleViewModel *)viewModel
+{
+    if (_viewModel == nil) {
+        _viewModel = [[SSCircleViewModel alloc]init];
+    }
+    return _viewModel;
+}
+
+@end

@@ -1,0 +1,480 @@
+//
+//  FZHttpTool.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/9/4.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "FZHttpTool.h"
+#import <AFNetworking/AFNetworking.h>
+#import "Reachability.h"
+
+#define wifi [FZHttpTool isConnectionAvailable]
+#define kNetworkNotReachability ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus <= 0)
+
+#define HttpBegin         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+#define HttpEnd         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
+
+#ifdef DEBUG
+#define FZRequestTimeOut 60.0f
+#else
+#define FZRequestTimeOut 20.0f
+#endif
+
+@interface FZHttpTool()
+
+@property(nonatomic,strong,readonly) NSMutableArray * _Nullable requestArr;
+
+@end
+
+@implementation FZHttpTool
++(FZHttpTool *)share{
+    static FZHttpTool *shareInstace = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shareInstace=[[self alloc] init];
+    });
+    return shareInstace;
+}
++ (void)get:(NSString *)url parameters:(NSDictionary *)parameters httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    AFHTTPSessionManager *manager  = nil;
+    manager = [self getAFHTTPRequestOperationManager];
+    if(!wifi){
+        [ShowMes show:@"无法连接网络,请检查网络设置"];
+        return;
+    }
+    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (httpToolSuccess) {
+                [self successWithResponseObject:responseObject httpToolSuccess:httpToolSuccess failure:failure];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+            [self failureOperation:task error:error];
+        }
+    }];
+}
+
++ (void)get:(NSString *)url parameters:(NSDictionary *)parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    //再次加载标示
+    if (showHUD) {
+        HttpBegin
+    }
+    AFHTTPSessionManager *manager  = nil;
+    manager = [self getAFHTTPRequestOperationManager];
+    if(!wifi){
+        [ShowMes show:@"无法连接网络,请检查网络设置"];
+        return;
+    }
+    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        HttpEnd
+        if (httpToolSuccess) {
+          [self successWithResponseObject:responseObject httpToolSuccess:httpToolSuccess failure:failure];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        HttpEnd
+        if (failure) {
+            failure(error);
+            [self failureOperation:task error:error];
+        }
+    }];
+}
+
+
++ (void)post:(NSString *)url parameters:(id )parameters httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    AFHTTPSessionManager *manager  = nil;
+    manager = [self getAFHTTPRequestOperationManager];
+    if(!wifi){
+        [ShowMes show:@"无法连接网络,请检查网络设置"];
+        return;
+    }
+    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (httpToolSuccess) {
+           [self successWithResponseObject:responseObject httpToolSuccess:httpToolSuccess failure:failure];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+         if (failure) {
+            failure(error);
+            [self failureOperation:task error:error];
+        }
+    }];
+}
+
+
++ (void)post:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    if (showHUD) {
+        HttpBegin
+    }
+    AFHTTPSessionManager *manager  = nil;
+    manager = [self getAFHTTPRequestOperationManager];
+    if(!wifi){
+        [ShowMes show:@"无法连接网络,请检查网络设置"];
+        return;
+    }
+    
+    NSMutableDictionary *dicData;
+    if([url isEqualToString:UserLoginWechatUrl])
+    {
+        dicData = parameters;
+    }else{
+        dicData = [self getRequestParam];
+        [dicData addEntriesFromDictionary:parameters];
+    }
+    
+    [manager POST:url parameters:dicData progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        HttpEnd
+     if (httpToolSuccess) {
+          [self successWithResponseObject:responseObject httpToolSuccess:httpToolSuccess failure:failure];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        HttpEnd
+        if (failure) {
+            failure(error);
+            [self failureOperation:task error:error];
+        }
+    }];
+}
+
++ (void)postUserInfo:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    if (showHUD) {
+        HttpBegin
+    }
+    AFHTTPSessionManager *manager  = nil;
+    manager = [self getAFHTTPRequestOperationManager];
+    manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];//不设置会报-1016或者会有编码问题
+    //支持https
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+    securityPolicy.allowInvalidCertificates = YES;//是否允许无效的证书
+    securityPolicy.validatesDomainName = NO;//一般推荐不要太严格验证domain
+    manager.securityPolicy=securityPolicy;
+
+    if(!wifi){
+        [ShowMes show:@"无法连接网络,请检查网络设置"];
+        return;
+    }
+    NSMutableDictionary *dicData = [[NSMutableDictionary alloc]init];
+    SSAccount *account = [SSAccountTool share].account;
+    dicData[@"user.securityToken"] = account.token;
+    [dicData addEntriesFromDictionary:parameters];
+    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+    
+    NSString *boundary = @"----WebKitFormBoundaryE19zNvXGzXaLvS5C";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    NSMutableData *body = [NSMutableData data];
+    NSArray *allkeys = [dicData allKeys];
+    for(int i = 0; i < allkeys.count ; i ++) {
+        if  (![allkeys[i] isEqualToString:@"file"]){
+            [body appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=%@\r\n\r\n",allkeys[i]] dataUsingEncoding:NSUTF8StringEncoding]];
+            NSString *key = allkeys[i];
+            [body appendData:[[dicData[key] stringByAppendingString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+    }
+    //photo file
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"perIcon.png\"\r\n", @"file"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Type:image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data;
+    if ([parameters[@"file"] isKindOfClass:[NSString class]]) {
+        NSString *fileStr = parameters[@"file"];
+        data = [NSData dataWithContentsOfFile:fileStr];
+    }else{
+         data = UIImageJPEGRepresentation(parameters[@"file"], 0.28);
+
+    }
+ 
+    [body appendData:data ];
+
+    [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    //set http body
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:body];
+    
+    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+//         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        httpToolSuccess(dic);
+        if (httpToolSuccess) {
+            [self successWithResponseObject:responseObject httpToolSuccess:httpToolSuccess failure:failure];
+        }
+    }]resume];
+}
+
+
+
++ (void)deleted:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    if (showHUD) {
+        HttpBegin
+    }
+    AFHTTPSessionManager *manager  = nil;
+    manager = [self getAFHTTPRequestOperationManager];
+    if(!wifi){
+        [ShowMes show:@"无法连接网络,请检查网络设置"];
+        return;
+    }
+    [manager DELETE:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        HttpEnd
+        if (httpToolSuccess) {
+            [self successWithResponseObject:responseObject httpToolSuccess:httpToolSuccess failure:failure];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        HttpEnd
+        if (failure) {
+            failure(error);
+            [self failureOperation:task error:error];
+        }
+    }];
+    
+}
+
+
++ (void)put:(NSString *)url parameters:(id )parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    if (showHUD) {
+        HttpBegin
+    }
+    AFHTTPSessionManager *manager  = nil;
+    manager = [self getAFHTTPRequestOperationManager];
+    if(!wifi){
+        [ShowMes show:@"无法连接网络,请检查网络设置"];
+        return;
+    }
+    [manager PUT:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        HttpEnd
+        if (httpToolSuccess) {
+            [self successWithResponseObject:responseObject httpToolSuccess:httpToolSuccess failure:failure];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        HttpEnd
+        if (failure) {
+            failure(error);
+            [self failureOperation:task error:error];
+        }
+    }];
+}
+
+
++(void)patch:(NSString *)url parameters:(id)parameters isShowHUD:(BOOL)showHUD httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    if (showHUD) {
+        HttpBegin
+    }
+    AFHTTPSessionManager *manager  = nil;
+    manager = [self getAFHTTPRequestOperationManager];
+    if(!wifi){
+        [ShowMes show:@"无法连接网络,请检查网络设置"];
+        return;
+    }
+    [manager PATCH:url parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        HttpEnd
+        if (httpToolSuccess) {
+            [self successWithResponseObject:responseObject httpToolSuccess:httpToolSuccess failure:failure];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        HttpEnd
+        if (failure) {
+            failure(error);
+            [self failureOperation:task error:error];
+        }
+    }];
+}
+
+
++ (RACSignal *)getWithURL:(NSString *)urlString withParamater:(NSDictionary *)paramter
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = 5;
+    RACSubject *sub =[ RACSubject subject];
+    [manager GET:urlString parameters:paramter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [sub sendNext:@{@"code":@100,@"data":responseObject}];
+        [sub sendCompleted];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [sub sendNext:@{@"code":@-400,@"data":@"请求失败"}];
+        [sub sendCompleted];
+    }];
+    return sub;
+}
+
++ (RACSignal *)postWithURL:(NSString *)urlString withParamater:(NSDictionary *)parameter
+{
+    RACSubject *sub =[ RACSubject subject];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [self getAFHTTPRequestOperationManager];
+    //支持https
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+    securityPolicy.allowInvalidCertificates = YES;//是否允许无效的证书
+    securityPolicy.validatesDomainName = NO;//一般推荐不要太严格验证domain
+    manager.securityPolicy=securityPolicy;
+    [manager POST:urlString parameters:parameter progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject[@"code"] intValue] == 100) {
+            [sub sendNext:responseObject[@"data"]];
+            [sub sendCompleted];
+
+            if (responseObject[@"data"][@"message"]) {
+                [ShowMes show:responseObject[@"data"][@"message"]];
+            }
+        
+        }else{
+//            [sub sendNext:responseObject];
+            [sub sendCompleted];
+            [ShowMes show:responseObject[@"msg"]];
+         }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [sub sendNext:@{@"code":@-400}];
+        [sub sendCompleted];
+    }];
+    
+    
+    return sub;
+}
+
+ 
+
++ (AFHTTPSessionManager *)getAFHTTPRequestOperationManager
+{
+    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.timeoutIntervalForRequest = FZRequestTimeOut;
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:config];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json",@"text/plain",@"text/javascript",@"text/html",nil];
+
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+    securityPolicy.validatesDomainName = NO;
+    securityPolicy.allowInvalidCertificates = YES;
+    manager.securityPolicy = securityPolicy;
+    
+
+    
+//     NSString *idfa= [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//    [manager.requestSerializer setValue:acc.access_token  forHTTPHeaderField:@"QSC-TOKEN"];
+//    NSString *prltform = [NSString stringWithFormat:kHeadVersion,[[UIDevice currentDevice] systemVersion]];
+//    [manager.requestSerializer setValue:prltform  forHTTPHeaderField:@"Platform"];
+//    [manager.requestSerializer setValue:idfa  forHTTPHeaderField:@"DeviceId"];  // 添加idfa标示
+    
+    return manager;
+}
+
++ (NSMutableDictionary *)getRequestParam
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    SSAccount *account = [SSAccountTool share].account;
+//    @"ddbfefb471384bfeb4abefca93d4dfa8"
+    NSDictionary *userDic = @{@"securityToken":account.token,@"uid":account.uid};
+    params[@"user"] = userDic;
+    return params;
+}
+
++ (void)failureOperation:(NSURLSessionDataTask *)task error:(NSError *)error
+{
+//    [[QSCTipHUDManager sharedQSCTipHUDManager] hideHUD];
+    
+//    [ProgressHUD showError:[self requestErrorControllWithErrorCode:error.code]];
+    
+}
+
++ (void)successWithResponseObject:(id)responseObject httpToolSuccess:(FZSuccess)httpToolSuccess failure:(FZFailure)failure
+{
+    if (![responseObject isKindOfClass:[NSNull class]]) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dataDic = responseObject;
+            if ([dataDic[@"code"] intValue] == 998) {
+                [ProgressHUD showSuccess:dataDic[@"msg"]];
+                SSLoginVC *loginVC = [[SSLoginVC alloc]init];
+                [[[FZRouteUrlTool share]getCurrentVC].navigationController pushViewController:loginVC animated:YES];
+            }else if ([dataDic[@"code"] intValue] == 997)//未绑定
+            {
+                httpToolSuccess(responseObject);
+            }
+            else if([dataDic[@"code"] intValue] == 100){
+                httpToolSuccess(responseObject);
+//                [ProgressHUD showSuccess:dataDic[@"msg"]];
+            }else{
+                httpToolSuccess(responseObject);
+            }
+        }
+    }
+}
+
+- (void)checkNetworkStatus:(void (^)(BOOL))block
+{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        BOOL state = NO;
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+            state = NO;
+        }else{
+            state = YES;
+        }
+        if (block) {
+            block(state);
+        }
+    }];
+    [manager startMonitoring];
+}
+
++(BOOL)isConnectionAvailable{//判断是否有网;
+    BOOL isExistenceNetwork = YES;
+    Reachability *reach = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    switch ([reach currentReachabilityStatus]) {
+        case NotReachable:
+            isExistenceNetwork = NO;
+            //WCLog(@"notReachable");
+            break;
+        case ReachableViaWiFi:
+            isExistenceNetwork = YES;
+            //WCLog(@"WIFI");
+            break;
+        case ReachableViaWWAN:
+            isExistenceNetwork = YES;
+            //WCLog(@"3G");
+        case ReachableVia2G:
+            isExistenceNetwork = YES;
+            //WCLog(@"3G");
+        case ReachableVia3G:
+            isExistenceNetwork = YES;
+            //WCLog(@"3G");
+            break;
+    }
+    if (!isExistenceNetwork) {
+        return NO;
+    }
+    return isExistenceNetwork;
+}
+
+
+- (NSData *)compressImage:(UIImage *)image {
+    CGFloat compression = 0.9f;
+    CGFloat maxCompression = 0.1f;
+    int maxFileSize = 2048000;
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, compression);
+    
+    while ([imageData length] > maxFileSize && compression > maxCompression)
+    {
+        compression -= 0.1;
+        imageData = UIImageJPEGRepresentation(image, compression);
+    }
+    return imageData;
+}
+
+@end

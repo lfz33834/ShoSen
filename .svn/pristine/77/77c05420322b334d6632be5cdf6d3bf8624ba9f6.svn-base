@@ -1,0 +1,94 @@
+//
+//  SSCircleFriendRecommendCell.m
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/10/30.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import "SSCircleFriendRecommendCell.h"
+#import "SSCircleViewModel.h"
+
+@interface SSCircleFriendRecommendCell()
+
+@property(nonatomic, strong) SSCircleViewModel *viewModel;
+
+@end
+
+@implementation SSCircleFriendRecommendCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.header_imageview.layer.cornerRadius = 25;
+    self.header_imageview.clipsToBounds = YES;
+}
+
+- (void)initCellWithModel:(SSCircleListModel *)model
+{
+    self.model = model;
+    [self.header_imageview sd_setImageWithURL:[NSURL URLWithString:model.headImg] placeholderImage:[UIImage imageNamed:@"mine_header_normal"]];
+    self.title_label.text = model.name;
+    if (model.isFollow) {
+        if (self.type == SSCircleFriendRecommendCellTypeFans) {
+            [self.guanzhu_button setTitle:@"互相关注" forState:UIControlStateNormal];
+        }else{
+            [self.guanzhu_button setTitle:@"已关注" forState:UIControlStateNormal];
+        }
+        [self.guanzhu_button setTitleColor:kColor(@"999999") forState:UIControlStateNormal];
+        self.guanzhu_button.layer.cornerRadius = 5;
+        self.guanzhu_button.layer.borderColor = kColor(@"999999").CGColor;
+        self.guanzhu_button.layer.borderWidth = 1;
+    }else{
+        [self.guanzhu_button setTitle:@"+关注" forState:UIControlStateNormal];
+        [self.guanzhu_button setTitleColor:kColor(@"D6B35B") forState:UIControlStateNormal];
+        self.guanzhu_button.layer.cornerRadius = 5;
+        self.guanzhu_button.layer.borderColor = kColor(@"D6B35B").CGColor;
+        self.guanzhu_button.layer.borderWidth = 1;
+    }
+    
+    [self.guanzhu_button addTarget:self action:@selector(guanzhuButtonTapAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)guanzhuButtonTapAction
+{
+    SSAccount *account = [SSAccountTool share].account;
+    NSString *userId;
+    if (self.type == SSCircleFriendRecommendCellTypeFans) {
+        userId = self.model.userId;
+    }else{
+        userId = self.model.ID;
+    }
+    WEAKSELF
+    if (self.model.isFollow) {
+        [self.viewModel delFollowWithUserID:account.uid follower:userId callBack:^(id obj) {
+            weakSelf.model.isFollow = NO;
+            if (weakSelf.block) {
+                weakSelf.block(weakSelf.model);
+            }
+        }];
+    }else{
+        [self.viewModel addFollowWithUserID:account.uid follower:userId callBack:^(id obj) {
+            weakSelf.model.isFollow = YES;
+            if (weakSelf.block) {
+                weakSelf.block(weakSelf.model);
+            }
+        }];
+    }
+
+}
+
+- (SSCircleViewModel *)viewModel
+{
+    if (_viewModel == nil) {
+        _viewModel = [[SSCircleViewModel alloc]init];
+    }
+    return _viewModel;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

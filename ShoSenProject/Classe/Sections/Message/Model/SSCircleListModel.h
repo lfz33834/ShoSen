@@ -1,0 +1,42 @@
+//
+//  SSCircleListModel.h
+//  ShoSenProject
+//
+//  Created by lifuzhou on 2018/10/25.
+//  Copyright © 2018年 lifuzhou. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface SSCircleListModel : NSObject
+
+@property (nonatomic, copy) NSString *comCount;//消息
+@property (nonatomic, copy) NSString *content ;
+@property (nonatomic, copy) NSString *createTime ;
+@property (nonatomic, copy) NSString *headImg ;
+@property (nonatomic, copy) NSString *ID ;
+@property (nonatomic, copy) NSString *location ;
+@property (nonatomic, copy) NSString *markCount ;//点赞
+@property (nonatomic, copy) NSString *messStatus ;
+@property (nonatomic, copy) NSString *name ;
+@property (nonatomic, copy) NSString *picture ;
+@property (nonatomic, copy) NSString *userId ;
+@property (nonatomic, copy) NSString *markStatus ;
+
+@property (nonatomic, copy) NSString *eachOther;//1互相关注  
+
+@property (nonatomic, copy)   NSString *messId;
+@property (nonatomic, copy)   NSString *userName;
+@property (nonatomic, assign) CGFloat contentHeight;
+@property (nonatomic, assign) CGFloat maxContentHeight;
+@property (nonatomic, assign) BOOL isUnfold;//是否展开
+
+@property (nonatomic, assign) CGFloat bottomViewHeight;
+@property (nonatomic, assign) CGFloat cirledetail_bottomViewHeight;
+@property (nonatomic, assign) CGFloat imageHeight;
+@property (nonatomic, assign) BOOL isFollow;
+@property (nonatomic, assign) BOOL isSelect;
+
+
+
+@end
